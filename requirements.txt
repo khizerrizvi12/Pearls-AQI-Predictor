@@ -1,6 +1,5 @@
 pandas
 numpy
-requests
 scikit-learn
 matplotlib
 seaborn
@@ -8,4 +7,3 @@ streamlit
 joblib
 python-dotenv
 shap
-
