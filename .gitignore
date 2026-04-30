@@ -1,5 +1,6 @@
 __pycache__/
 *.py[cod]
+*.log
 .pytest_cache/
 .mypy_cache/
 
@@ -21,4 +22,3 @@ models/*.joblib
 models/*.pkl
 
 .streamlit/secrets.toml
-
