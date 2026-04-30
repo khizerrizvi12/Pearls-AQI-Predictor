@@ -39,3 +39,11 @@ aqi-predictor/
 
 Create a local pipeline that fetches AQI data for one city, builds features, trains a baseline model, and displays predictions in Streamlit.
 
+## Automation
+
+GitHub Actions workflows are included for scheduled pipeline runs:
+
+- `Hourly AQI Predictions`: fetches data, builds features, and generates predictions every hour.
+- `Daily AQI Model Training`: fetches data, builds features, trains models, and generates predictions once per day.
+
+Generated CSV and model files are uploaded as workflow artifacts. Because this starter version does not yet use a model registry, the hourly workflow trains fallback models if saved model artifacts are not present on the fresh runner. In a production version, these outputs should be written to a feature store and model registry.

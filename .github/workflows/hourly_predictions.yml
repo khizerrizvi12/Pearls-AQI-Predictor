@@ -1,0 +1,51 @@
+name: Hourly AQI Predictions
+
+on:
+  schedule:
+    - cron: "0 * * * *"
+  workflow_dispatch:
+
+jobs:
+  refresh-predictions:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: "pip"
+
+      - name: Install dependencies
+        run: python -m pip install -r requirements.txt
+
+      - name: Fetch latest 90-day AQI and weather data
+        run: python src/fetch_data.py
+
+      - name: Build model features
+        run: python src/features.py
+
+      - name: Train fallback models if model artifacts are missing
+        run: |
+          if [ ! -f models/target_aqi_24h_random_forest.joblib ]; then
+            python src/train.py
+          fi
+
+      - name: Generate latest AQI predictions
+        run: python src/predict.py
+
+      - name: Upload prediction artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: hourly-aqi-predictions
+          path: |
+            data/raw/*.csv
+            data/processed/karachi_aqi_features.csv
+            data/processed/model_metrics.csv
+            data/processed/latest_predictions.csv
+            models/*.json
+            models/*.joblib
+          if-no-files-found: error
