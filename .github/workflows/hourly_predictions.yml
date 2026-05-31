@@ -32,6 +32,7 @@ jobs:
         run: |
           if [ ! -f models/target_aqi_24h_random_forest.joblib ]; then
             python src/train.py
+            python src/explain.py
           fi
 
       - name: Generate latest AQI predictions
@@ -45,6 +46,7 @@ jobs:
             data/raw/*.csv
             data/processed/karachi_aqi_features.csv
             data/processed/model_metrics.csv
+            data/processed/feature_importance.csv
             data/processed/latest_predictions.csv
             models/*.json
             models/*.joblib

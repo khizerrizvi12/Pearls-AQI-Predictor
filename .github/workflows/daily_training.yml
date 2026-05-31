@@ -31,6 +31,9 @@ jobs:
       - name: Train and evaluate AQI models
         run: python src/train.py
 
+      - name: Generate feature importance explanations
+        run: python src/explain.py
+
       - name: Generate latest AQI predictions
         run: python src/predict.py
 
@@ -42,8 +45,8 @@ jobs:
             data/raw/*.csv
             data/processed/karachi_aqi_features.csv
             data/processed/model_metrics.csv
+            data/processed/feature_importance.csv
             data/processed/latest_predictions.csv
             models/*.json
             models/*.joblib
           if-no-files-found: error
-

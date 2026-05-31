@@ -12,6 +12,7 @@ PROJECT_ROOT = Path(__file__).resolve().parents[1]
 RAW_DATA_PATH = PROJECT_ROOT / "data" / "raw" / "karachi_weather_air_quality_hourly.csv"
 PREDICTIONS_PATH = PROJECT_ROOT / "data" / "processed" / "latest_predictions.csv"
 METRICS_PATH = PROJECT_ROOT / "data" / "processed" / "model_metrics.csv"
+FEATURE_IMPORTANCE_PATH = PROJECT_ROOT / "data" / "processed" / "feature_importance.csv"
 
 AQI_BANDS = [
     ("Good", 0, 50, "#2f8f46"),
@@ -279,7 +280,7 @@ def inject_styles() -> None:
 
         .pipeline-grid {
             display: grid;
-            grid-template-columns: repeat(4, minmax(0, 1fr));
+            grid-template-columns: repeat(5, minmax(0, 1fr));
             gap: 0.75rem;
         }
 
@@ -359,6 +360,13 @@ def load_predictions() -> pd.DataFrame:
 @st.cache_data
 def load_metrics() -> pd.DataFrame:
     return pd.read_csv(METRICS_PATH)
+
+
+@st.cache_data
+def load_feature_importance() -> pd.DataFrame:
+    if not FEATURE_IMPORTANCE_PATH.exists():
+        return pd.DataFrame()
+    return pd.read_csv(FEATURE_IMPORTANCE_PATH)
 
 
 def aqi_category(aqi: float) -> str:
@@ -586,11 +594,43 @@ def render_model_section(metrics: pd.DataFrame) -> None:
         )
 
 
+def render_explainability_section(feature_importance: pd.DataFrame) -> None:
+    st.markdown('<div class="section-title">Forecast drivers</div>', unsafe_allow_html=True)
+
+    if feature_importance.empty:
+        st.info("Feature importance has not been generated yet. Run `python src/explain.py` to create it.")
+        return
+
+    available_targets = list(feature_importance["target"].drop_duplicates())
+    target_labels = {target: target.replace("target_aqi_", "").replace("h", " hour") for target in available_targets}
+    selected_label = st.segmented_control(
+        "Forecast horizon",
+        options=[target_labels[target] for target in available_targets],
+        default=target_labels[available_targets[0]],
+    )
+    selected_target = next(target for target, label in target_labels.items() if label == selected_label)
+
+    top_features = (
+        feature_importance[feature_importance["target"] == selected_target]
+        .sort_values("importance", ascending=False)
+        .head(12)
+        .sort_values("importance", ascending=True)
+    )
+    chart_df = top_features[["display_feature", "importance"]].rename(
+        columns={"display_feature": "Feature", "importance": "Importance"}
+    )
+
+    st.bar_chart(chart_df, x="Feature", y="Importance", horizontal=True, height=420)
+    method = top_features["method"].iloc[0].replace("_", " ")
+    st.caption(f"Explanation method: {method}. Higher values indicate stronger influence on the selected forecast model.")
+
+
 def render_pipeline_section() -> None:
     steps = [
         ("Fetch", "Open-Meteo weather and pollutant data"),
         ("Feature", "Lags, rolling windows, AQI change rate"),
         ("Train", "Baseline, Ridge, and Random Forest models"),
+        ("Explain", "Feature importance for forecast drivers"),
         ("Predict", "24h, 48h, and 72h AQI forecasts"),
     ]
     cards = "".join(
@@ -614,6 +654,7 @@ def main() -> None:
         raw_df = load_raw_data()
         predictions = load_predictions()
         metrics = load_metrics()
+        feature_importance = load_feature_importance()
     except FileNotFoundError as exc:
         st.error(f"Missing project data file: {exc.filename}")
         st.stop()
@@ -624,6 +665,7 @@ def main() -> None:
     render_summary(raw_df, predictions)
     render_charts(raw_df, predictions)
     render_model_section(metrics)
+    render_explainability_section(feature_importance)
     render_pipeline_section()
 
 
