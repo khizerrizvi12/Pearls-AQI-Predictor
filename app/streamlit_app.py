@@ -86,6 +86,18 @@ def inject_styles() -> None:
             font-weight: 720;
         }
 
+        div[data-testid="stMetricValue"],
+        div[data-testid="stMetricValue"] * {
+            color: var(--ink) !important;
+            opacity: 1 !important;
+            font-weight: 820 !important;
+        }
+
+        div[data-testid="stMetricDelta"],
+        div[data-testid="stMetricDelta"] * {
+            opacity: 1 !important;
+        }
+
         .topbar {
             display: flex;
             align-items: flex-start;
@@ -371,6 +383,10 @@ def format_number(value: float, decimals: int = 1) -> str:
     return f"{float(value):,.{decimals}f}"
 
 
+def render_html(html: str) -> None:
+    st.markdown(html, unsafe_allow_html=True)
+
+
 def delta_label(current: float, previous: float) -> tuple[str, str]:
     delta = current - previous
     if delta > 0:
@@ -462,7 +478,6 @@ def render_summary(raw_df: pd.DataFrame, predictions: pd.DataFrame) -> None:
         for column, label, unit in POLLUTANTS
     )
 
-    st.markdown('<div class="summary-grid">', unsafe_allow_html=True)
     left, right = st.columns([0.95, 1.35], gap="medium")
 
     with left:
@@ -500,27 +515,25 @@ def render_summary(raw_df: pd.DataFrame, predictions: pd.DataFrame) -> None:
             unsafe_allow_html=True,
         )
 
-    st.markdown("</div>", unsafe_allow_html=True)
-
     forecast_cards = []
     for row in predictions.itertuples(index=False):
         category_color = aqi_color(row.aqi_category)
         forecast_cards.append(
-            f"""
-            <div class="forecast-card" style="border-left-color:{category_color};">
-                <div class="forecast-top">
-                    <div class="forecast-horizon">{int(row.horizon_hours)} hour forecast</div>
-                    {status_pill(row.aqi_category)}
-                </div>
-                <div class="forecast-value">{float(row.predicted_aqi):.1f}</div>
-                <div class="detail">Forecast time: {row.forecast_time:%d %b %Y, %I:%M %p}</div>
-                <div class="detail">Model: {str(row.model).replace("_", " ")}</div>
-            </div>
-            """
+            (
+                f'<div class="forecast-card" style="border-left-color:{category_color};">'
+                f'<div class="forecast-top">'
+                f'<div class="forecast-horizon">{int(row.horizon_hours)} hour forecast</div>'
+                f'{status_pill(row.aqi_category)}'
+                f'</div>'
+                f'<div class="forecast-value">{float(row.predicted_aqi):.1f}</div>'
+                f'<div class="detail">Forecast time: {row.forecast_time:%d %b %Y, %I:%M %p}</div>'
+                f'<div class="detail">Model: {str(row.model).replace("_", " ")}</div>'
+                f'</div>'
+            )
         )
 
-    st.markdown('<div class="section-title">Forecast outlook</div>', unsafe_allow_html=True)
-    st.markdown(f'<div class="forecast-grid">{"".join(forecast_cards)}</div>', unsafe_allow_html=True)
+    render_html('<div class="section-title">3-day forecast outlook</div>')
+    render_html(f'<div class="forecast-grid">{"".join(forecast_cards)}</div>')
 
 
 def render_charts(raw_df: pd.DataFrame, predictions: pd.DataFrame) -> None:
@@ -581,17 +594,17 @@ def render_pipeline_section() -> None:
         ("Predict", "24h, 48h, and 72h AQI forecasts"),
     ]
     cards = "".join(
-        f"""
-        <div class="pipeline-step">
-            <div class="step-index">{index}</div>
-            <div class="step-title">{title}</div>
-            <div class="detail">{body}</div>
-        </div>
-        """
+        (
+            f'<div class="pipeline-step">'
+            f'<div class="step-index">{index}</div>'
+            f'<div class="step-title">{title}</div>'
+            f'<div class="detail">{body}</div>'
+            f'</div>'
+        )
         for index, (title, body) in enumerate(steps, start=1)
     )
-    st.markdown('<div class="section-title">Automated pipeline</div>', unsafe_allow_html=True)
-    st.markdown(f'<div class="pipeline-grid">{cards}</div>', unsafe_allow_html=True)
+    render_html('<div class="section-title">Automated pipeline</div>')
+    render_html(f'<div class="pipeline-grid">{cards}</div>')
 
 
 def main() -> None:
