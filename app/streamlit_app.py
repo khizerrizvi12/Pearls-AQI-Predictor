@@ -1,4 +1,4 @@
-"""Professional Streamlit dashboard for AQI forecasts."""
+"""Streamlit dashboard for Karachi AQI monitoring and forecasts."""
 
 from __future__ import annotations
 
@@ -13,16 +13,16 @@ RAW_DATA_PATH = PROJECT_ROOT / "data" / "raw" / "karachi_weather_air_quality_hou
 PREDICTIONS_PATH = PROJECT_ROOT / "data" / "processed" / "latest_predictions.csv"
 METRICS_PATH = PROJECT_ROOT / "data" / "processed" / "model_metrics.csv"
 
-AQI_COLORS = {
-    "Good": "#2e7d32",
-    "Moderate": "#b88700",
-    "Unhealthy for Sensitive Groups": "#c66a00",
-    "Unhealthy": "#c62828",
-    "Very Unhealthy": "#6a1b9a",
-    "Hazardous": "#5d1f1f",
-}
+AQI_BANDS = [
+    ("Good", 0, 50, "#2f8f46"),
+    ("Moderate", 51, 100, "#c69214"),
+    ("Unhealthy for Sensitive Groups", 101, 150, "#d97924"),
+    ("Unhealthy", 151, 200, "#c93d3d"),
+    ("Very Unhealthy", 201, 300, "#7b3fa1"),
+    ("Hazardous", 301, 500, "#6b2737"),
+]
 
-POLLUTANT_COLUMNS = [
+POLLUTANTS = [
     ("pm2_5", "PM2.5", "ug/m3"),
     ("pm10", "PM10", "ug/m3"),
     ("ozone", "Ozone", "ug/m3"),
@@ -32,7 +32,7 @@ POLLUTANT_COLUMNS = [
 ]
 
 
-st.set_page_config(page_title="Karachi AQI Predictor", layout="wide")
+st.set_page_config(page_title="Pearls AQI Predictor", layout="wide")
 
 
 def inject_styles() -> None:
@@ -40,142 +40,287 @@ def inject_styles() -> None:
         """
         <style>
         :root {
-            --panel-border: #d8dee8;
-            --muted-text: #5b6472;
+            --bg: #f4f7fb;
             --surface: #ffffff;
-            --soft-surface: #f6f8fb;
+            --surface-2: #f8fafc;
+            --border: #d9e2ef;
             --ink: #172033;
+            --muted: #657184;
+            --accent: #0f766e;
+            --accent-2: #2563eb;
+        }
+
+        .stApp {
+            background: var(--bg);
         }
 
         .main .block-container {
-            padding-top: 1.8rem;
+            max-width: 1280px;
+            padding-top: 1.25rem;
             padding-bottom: 2.5rem;
-            max-width: 1220px;
+        }
+
+        section[data-testid="stSidebar"] {
+            background: #0f172a;
+        }
+
+        section[data-testid="stSidebar"] * {
+            color: #e5e7eb;
         }
 
         h1, h2, h3 {
+            color: var(--ink);
             letter-spacing: 0;
+        }
+
+        div[data-testid="stMetric"] {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 0.85rem 0.95rem;
+            min-height: 112px;
+        }
+
+        div[data-testid="stMetric"] label {
+            color: var(--muted);
+            font-weight: 720;
+        }
+
+        .topbar {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 1rem;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .brand-title {
+            font-size: 2rem;
+            font-weight: 820;
+            line-height: 1.12;
+            margin: 0;
             color: var(--ink);
         }
 
-        .app-header {
-            border-bottom: 1px solid var(--panel-border);
-            padding-bottom: 1rem;
-            margin-bottom: 1.3rem;
-        }
-
-        .app-title {
-            font-size: 2.15rem;
-            font-weight: 760;
-            line-height: 1.15;
-            margin: 0;
-        }
-
-        .app-subtitle {
-            color: var(--muted-text);
-            font-size: 0.98rem;
+        .brand-subtitle {
+            color: var(--muted);
             margin-top: 0.35rem;
+            font-size: 0.98rem;
         }
 
-        .status-pill {
-            display: inline-flex;
-            align-items: center;
+        .run-status {
+            border: 1px solid #b6d8d4;
+            background: #ecfdf5;
+            color: #0f513c;
             border-radius: 999px;
-            color: #ffffff;
-            font-weight: 700;
-            min-height: 2rem;
-            padding: 0.28rem 0.72rem;
+            padding: 0.45rem 0.7rem;
+            font-weight: 760;
             white-space: nowrap;
         }
 
+        .section-title {
+            font-size: 1.05rem;
+            font-weight: 800;
+            color: var(--ink);
+            margin: 1.25rem 0 0.6rem;
+        }
+
+        .summary-grid {
+            display: grid;
+            grid-template-columns: minmax(280px, 0.95fr) minmax(360px, 1.4fr);
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
         .panel {
-            border: 1px solid var(--panel-border);
-            border-radius: 8px;
             background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
             padding: 1rem;
         }
 
-        .panel-title {
-            color: var(--muted-text);
-            font-size: 0.78rem;
-            font-weight: 750;
+        .panel-muted {
+            background: var(--surface-2);
+        }
+
+        .label {
+            color: var(--muted);
+            font-size: 0.76rem;
+            font-weight: 800;
             letter-spacing: 0.04em;
             text-transform: uppercase;
-            margin-bottom: 0.35rem;
         }
 
-        .large-number {
+        .aqi-main {
+            display: flex;
+            align-items: flex-end;
+            gap: 0.75rem;
+            margin: 0.35rem 0 0.75rem;
+        }
+
+        .aqi-number {
             color: var(--ink);
-            font-size: 2.65rem;
-            font-weight: 780;
-            line-height: 1;
+            font-size: 4rem;
+            font-weight: 860;
+            line-height: 0.95;
         }
 
-        .detail-text {
-            color: var(--muted-text);
-            font-size: 0.92rem;
-            margin-top: 0.45rem;
+        .aqi-category {
+            display: inline-flex;
+            align-items: center;
+            min-height: 2rem;
+            border-radius: 999px;
+            color: #ffffff;
+            font-size: 0.88rem;
+            font-weight: 800;
+            padding: 0.25rem 0.7rem;
+            margin-bottom: 0.2rem;
+        }
+
+        .detail {
+            color: var(--muted);
+            font-size: 0.9rem;
+        }
+
+        .scale {
+            margin-top: 1rem;
+        }
+
+        .scale-track {
+            position: relative;
+            height: 12px;
+            border-radius: 999px;
+            background: linear-gradient(90deg, #2f8f46 0 10%, #c69214 10% 20%, #d97924 20% 30%, #c93d3d 30% 40%, #7b3fa1 40% 60%, #6b2737 60% 100%);
+        }
+
+        .scale-marker {
+            position: absolute;
+            top: -5px;
+            width: 4px;
+            height: 22px;
+            border-radius: 2px;
+            background: #111827;
+            box-shadow: 0 0 0 3px #ffffff;
         }
 
         .forecast-grid {
             display: grid;
             grid-template-columns: repeat(3, minmax(0, 1fr));
-            gap: 0.8rem;
+            gap: 0.85rem;
         }
 
         .forecast-card {
-            border: 1px solid var(--panel-border);
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-left: 5px solid var(--accent-2);
             border-radius: 8px;
-            background: var(--soft-surface);
-            padding: 0.95rem;
+            padding: 1rem;
+        }
+
+        .forecast-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.7rem;
         }
 
         .forecast-horizon {
-            color: var(--muted-text);
+            color: var(--muted);
+            font-weight: 800;
             font-size: 0.82rem;
-            font-weight: 720;
         }
 
         .forecast-value {
             color: var(--ink);
-            font-size: 2rem;
-            font-weight: 780;
-            margin: 0.25rem 0 0.45rem;
+            font-size: 2.5rem;
+            font-weight: 860;
+            margin: 0.25rem 0;
         }
 
-        .metric-row {
+        .pollutant-grid {
             display: grid;
             grid-template-columns: repeat(3, minmax(0, 1fr));
             gap: 0.75rem;
         }
 
-        .mini-metric {
-            border: 1px solid var(--panel-border);
+        .pollutant {
+            background: var(--surface-2);
+            border: 1px solid var(--border);
             border-radius: 8px;
-            padding: 0.8rem;
-            background: #ffffff;
+            padding: 0.85rem;
         }
 
-        .mini-label {
-            color: var(--muted-text);
-            font-size: 0.76rem;
-            font-weight: 720;
+        .pollutant-name {
+            color: var(--muted);
+            font-size: 0.78rem;
+            font-weight: 800;
         }
 
-        .mini-value {
+        .pollutant-value {
             color: var(--ink);
-            font-size: 1.25rem;
-            font-weight: 760;
+            font-size: 1.45rem;
+            font-weight: 820;
             margin-top: 0.2rem;
         }
 
-        @media (max-width: 760px) {
+        .pipeline-grid {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 0.75rem;
+        }
+
+        .pipeline-step {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 0.85rem;
+        }
+
+        .step-index {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 1.7rem;
+            height: 1.7rem;
+            border-radius: 50%;
+            background: #dbeafe;
+            color: #1d4ed8;
+            font-weight: 850;
+            margin-bottom: 0.55rem;
+        }
+
+        .step-title {
+            color: var(--ink);
+            font-weight: 800;
+            margin-bottom: 0.15rem;
+        }
+
+        .stDataFrame {
+            border: 1px solid var(--border);
+            border-radius: 8px;
+        }
+
+        @media (max-width: 900px) {
+            .topbar,
+            .summary-grid {
+                display: block;
+            }
+
+            .run-status {
+                display: inline-flex;
+                margin-top: 0.8rem;
+            }
+
             .forecast-grid,
-            .metric-row {
+            .pollutant-grid,
+            .pipeline-grid {
                 grid-template-columns: 1fr;
             }
-            .app-title {
-                font-size: 1.65rem;
+
+            .aqi-number {
+                font-size: 3.2rem;
             }
         }
         </style>
@@ -205,135 +350,248 @@ def load_metrics() -> pd.DataFrame:
 
 
 def aqi_category(aqi: float) -> str:
-    if aqi <= 50:
-        return "Good"
-    if aqi <= 100:
-        return "Moderate"
-    if aqi <= 150:
-        return "Unhealthy for Sensitive Groups"
-    if aqi <= 200:
-        return "Unhealthy"
-    if aqi <= 300:
-        return "Very Unhealthy"
+    for name, low, high, _color in AQI_BANDS:
+        if low <= aqi <= high:
+            return name
     return "Hazardous"
 
 
+def aqi_color(category: str) -> str:
+    for name, _low, _high, color in AQI_BANDS:
+        if name == category:
+            return color
+    return "#455a64"
+
+
 def status_pill(category: str) -> str:
-    color = AQI_COLORS.get(category, "#455a64")
-    return f'<span class="status-pill" style="background:{color};">{category}</span>'
+    return f'<span class="aqi-category" style="background:{aqi_color(category)};">{category}</span>'
 
 
 def format_number(value: float, decimals: int = 1) -> str:
-    return f"{value:,.{decimals}f}"
+    return f"{float(value):,.{decimals}f}"
+
+
+def delta_label(current: float, previous: float) -> tuple[str, str]:
+    delta = current - previous
+    if delta > 0:
+        return f"+{delta:.0f}", "from previous hour"
+    if delta < 0:
+        return f"{delta:.0f}", "from previous hour"
+    return "0", "from previous hour"
+
+
+def latest_metric(metrics: pd.DataFrame, target: str, model: str, metric: str) -> float | None:
+    rows = metrics[(metrics["target"] == target) & (metrics["model"] == model)]
+    if rows.empty:
+        return None
+    return float(rows.iloc[0][metric])
+
+
+def render_sidebar(raw_df: pd.DataFrame, predictions: pd.DataFrame) -> None:
+    latest = raw_df.iloc[-1]
+    first = raw_df.iloc[0]
+    basis_time = predictions["generated_at"].max()
+
+    with st.sidebar:
+        st.markdown("## Pearls AQI")
+        st.markdown("Karachi, Pakistan")
+        st.divider()
+        st.markdown("**Data window**")
+        st.write(f"{first['time']:%d %b %Y} to {latest['time']:%d %b %Y}")
+        st.markdown("**Rows loaded**")
+        st.write(f"{len(raw_df):,} hourly observations")
+        st.markdown("**Prediction basis**")
+        st.write(f"{basis_time:%d %b %Y, %I:%M %p}")
+        st.divider()
+        st.markdown("**AQI categories**")
+        for name, low, high, color in AQI_BANDS:
+            high_label = f"{high}" if high < 500 else "500+"
+            st.markdown(
+                f'<div style="display:flex;align-items:center;gap:0.5rem;margin:0.35rem 0;">'
+                f'<span style="width:0.7rem;height:0.7rem;border-radius:50%;background:{color};display:inline-block;"></span>'
+                f'<span>{name}: {low}-{high_label}</span></div>',
+                unsafe_allow_html=True,
+            )
 
 
 def render_header(latest_time: pd.Timestamp) -> None:
     st.markdown(
         f"""
-        <div class="app-header">
-            <div class="app-title">Karachi AQI Predictor</div>
-            <div class="app-subtitle">Latest observed hour: {latest_time:%d %b %Y, %I:%M %p}</div>
+        <div class="topbar">
+            <div>
+                <div class="brand-title">Karachi Air Quality Forecasting</div>
+                <div class="brand-subtitle">Operational dashboard for current AQI, pollutant conditions, and 3-day forecast signals.</div>
+            </div>
+            <div class="run-status">Pipeline active | Latest AQI: {latest_time:%d %b, %I:%M %p}</div>
         </div>
         """,
         unsafe_allow_html=True,
     )
 
 
-def render_current_snapshot(latest_row: pd.Series) -> None:
-    current_aqi = float(latest_row["us_aqi"])
+def render_overview(raw_df: pd.DataFrame, predictions: pd.DataFrame, metrics: pd.DataFrame) -> None:
+    latest = raw_df.iloc[-1]
+    previous = raw_df.iloc[-2]
+    current_aqi = float(latest["us_aqi"])
     category = aqi_category(current_aqi)
+    aqi_delta, delta_caption = delta_label(current_aqi, float(previous["us_aqi"]))
+    max_forecast = float(predictions["predicted_aqi"].max())
+    best_24h_rmse = latest_metric(metrics, "target_aqi_24h", "random_forest", "rmse")
 
+    cols = st.columns(4, gap="medium")
+    cols[0].metric("Current AQI", f"{current_aqi:.0f}", delta=aqi_delta, help=delta_caption)
+    cols[1].metric("Condition", category)
+    cols[2].metric("Peak Forecast", f"{max_forecast:.1f}")
+    cols[3].metric("24h RF RMSE", f"{best_24h_rmse:.2f}" if best_24h_rmse is not None else "N/A")
+
+
+def render_summary(raw_df: pd.DataFrame, predictions: pd.DataFrame) -> None:
+    latest = raw_df.iloc[-1]
+    current_aqi = float(latest["us_aqi"])
+    category = aqi_category(current_aqi)
+    marker_position = min(max(current_aqi / 500 * 100, 0), 100)
+
+    pollutant_cards = "".join(
+        f"""
+        <div class="pollutant">
+            <div class="pollutant-name">{label}</div>
+            <div class="pollutant-value">{format_number(latest[column])}</div>
+            <div class="detail">{unit}</div>
+        </div>
+        """
+        for column, label, unit in POLLUTANTS
+    )
+
+    st.markdown('<div class="summary-grid">', unsafe_allow_html=True)
     left, right = st.columns([0.95, 1.35], gap="medium")
 
     with left:
         st.markdown(
             f"""
             <div class="panel">
-                <div class="panel-title">Current AQI</div>
-                <div class="large-number">{current_aqi:.0f}</div>
-                <div style="margin-top:0.65rem;">{status_pill(category)}</div>
-                <div class="detail-text">Temperature {format_number(latest_row["temperature_2m"])} C | Wind {format_number(latest_row["wind_speed_10m"])} km/h | Humidity {latest_row["relative_humidity_2m"]:.0f}%</div>
+                <div class="label">Live air quality snapshot</div>
+                <div class="aqi-main">
+                    <div class="aqi-number">{current_aqi:.0f}</div>
+                    <div>{status_pill(category)}</div>
+                </div>
+                <div class="detail">Temperature {format_number(latest["temperature_2m"])} C | Humidity {latest["relative_humidity_2m"]:.0f}% | Wind {format_number(latest["wind_speed_10m"])} km/h</div>
+                <div class="scale">
+                    <div class="scale-track">
+                        <div class="scale-marker" style="left:{marker_position:.1f}%;"></div>
+                    </div>
+                    <div class="detail" style="display:flex;justify-content:space-between;margin-top:0.45rem;">
+                        <span>0</span><span>100</span><span>200</span><span>300+</span>
+                    </div>
+                </div>
             </div>
             """,
             unsafe_allow_html=True,
         )
 
     with right:
-        top_pollutants = "".join(
-            f"""
-                <div class="mini-metric">
-                    <div class="mini-label">{label}</div>
-                    <div class="mini-value">{format_number(latest_row[column])}</div>
-                    <div class="detail-text">{unit}</div>
-                </div>
-                """
-            for column, label, unit in POLLUTANT_COLUMNS[:3]
-        )
-        bottom_pollutants = "".join(
-            f"""
-                <div class="mini-metric">
-                    <div class="mini-label">{label}</div>
-                    <div class="mini-value">{format_number(latest_row[column])}</div>
-                    <div class="detail-text">{unit}</div>
-                </div>
-                """
-            for column, label, unit in POLLUTANT_COLUMNS[3:]
-        )
         st.markdown(
             f"""
-            <div class="metric-row">{top_pollutants}</div>
-            <div style="height:0.75rem;"></div>
-            <div class="metric-row">{bottom_pollutants}</div>
+            <div class="panel panel-muted">
+                <div class="label">Pollutant profile</div>
+                <div style="height:0.65rem;"></div>
+                <div class="pollutant-grid">{pollutant_cards}</div>
+            </div>
             """,
             unsafe_allow_html=True,
         )
 
+    st.markdown("</div>", unsafe_allow_html=True)
 
-def render_forecasts(predictions: pd.DataFrame) -> None:
-    cards = []
+    forecast_cards = []
     for row in predictions.itertuples(index=False):
-        cards.append(
+        category_color = aqi_color(row.aqi_category)
+        forecast_cards.append(
             f"""
-            <div class="forecast-card">
-                <div class="forecast-horizon">{int(row.horizon_hours)} hour forecast</div>
+            <div class="forecast-card" style="border-left-color:{category_color};">
+                <div class="forecast-top">
+                    <div class="forecast-horizon">{int(row.horizon_hours)} hour forecast</div>
+                    {status_pill(row.aqi_category)}
+                </div>
                 <div class="forecast-value">{float(row.predicted_aqi):.1f}</div>
-                {status_pill(row.aqi_category)}
-                <div class="detail-text">{row.forecast_time:%d %b, %I:%M %p}</div>
-                <div class="detail-text">Model: {str(row.model).replace("_", " ")}</div>
+                <div class="detail">Forecast time: {row.forecast_time:%d %b %Y, %I:%M %p}</div>
+                <div class="detail">Model: {str(row.model).replace("_", " ")}</div>
             </div>
             """
         )
 
-    st.markdown("### Forecast")
-    st.markdown(f'<div class="forecast-grid">{"".join(cards)}</div>', unsafe_allow_html=True)
+    st.markdown('<div class="section-title">Forecast outlook</div>', unsafe_allow_html=True)
+    st.markdown(f'<div class="forecast-grid">{"".join(forecast_cards)}</div>', unsafe_allow_html=True)
 
 
-def render_trend(raw_df: pd.DataFrame, predictions: pd.DataFrame) -> None:
-    trend = raw_df.tail(168)[["time", "us_aqi"]].rename(columns={"time": "Time", "us_aqi": "AQI"})
-    forecast = predictions[["forecast_time", "predicted_aqi"]].rename(
-        columns={"forecast_time": "Time", "predicted_aqi": "AQI"}
+def render_charts(raw_df: pd.DataFrame, predictions: pd.DataFrame) -> None:
+    left, right = st.columns([1.45, 0.9], gap="medium")
+
+    with left:
+        st.markdown('<div class="section-title">Observed and forecast AQI</div>', unsafe_allow_html=True)
+        observed = raw_df.tail(168)[["time", "us_aqi"]].rename(columns={"time": "Time", "us_aqi": "AQI"})
+        forecast = predictions[["forecast_time", "predicted_aqi"]].rename(
+            columns={"forecast_time": "Time", "predicted_aqi": "AQI"}
+        )
+        observed["Series"] = "Observed"
+        forecast["Series"] = "Forecast"
+        chart_df = pd.concat([observed, forecast], ignore_index=True)
+        st.line_chart(chart_df, x="Time", y="AQI", color="Series", height=360)
+
+    with right:
+        st.markdown('<div class="section-title">Forecast by horizon</div>', unsafe_allow_html=True)
+        bar_df = predictions[["horizon_hours", "predicted_aqi"]].copy()
+        bar_df["horizon_hours"] = bar_df["horizon_hours"].astype(str) + "h"
+        st.bar_chart(bar_df, x="horizon_hours", y="predicted_aqi", height=360)
+
+
+def render_model_section(metrics: pd.DataFrame) -> None:
+    st.markdown('<div class="section-title">Model evaluation</div>', unsafe_allow_html=True)
+
+    leaderboard = metrics.copy()
+    leaderboard["forecast"] = leaderboard["target"].str.replace("target_aqi_", "", regex=False)
+    leaderboard["model"] = leaderboard["model"].str.replace("_", " ")
+    leaderboard = leaderboard.sort_values(["target", "rmse"])
+
+    best = leaderboard.groupby("forecast", as_index=False).first()
+    best_display = best[["forecast", "model", "mae", "rmse", "r2"]].rename(
+        columns={"forecast": "Forecast", "model": "Best model", "mae": "MAE", "rmse": "RMSE", "r2": "R2"}
     )
-
-    trend["Series"] = "Observed"
-    forecast["Series"] = "Forecast"
-    chart_df = pd.concat([trend, forecast], ignore_index=True)
-
-    st.markdown("### AQI Trend")
-    st.line_chart(chart_df, x="Time", y="AQI", color="Series", height=330)
-
-
-def render_metrics(metrics_df: pd.DataFrame) -> None:
-    metrics = metrics_df.copy()
-    metrics["forecast"] = metrics["target"].str.replace("target_aqi_", "", regex=False)
-    metrics["model"] = metrics["model"].str.replace("_", " ")
-    metrics = metrics[["forecast", "model", "mae", "rmse", "r2"]]
-
-    st.markdown("### Model Evaluation")
     st.dataframe(
-        metrics.style.format({"mae": "{:.2f}", "rmse": "{:.2f}", "r2": "{:.3f}"}),
+        best_display.style.format({"MAE": "{:.2f}", "RMSE": "{:.2f}", "R2": "{:.3f}"}),
         use_container_width=True,
         hide_index=True,
     )
+
+    with st.expander("View full model comparison"):
+        full_display = leaderboard[["forecast", "model", "mae", "rmse", "r2"]].rename(
+            columns={"forecast": "Forecast", "model": "Model", "mae": "MAE", "rmse": "RMSE", "r2": "R2"}
+        )
+        st.dataframe(
+            full_display.style.format({"MAE": "{:.2f}", "RMSE": "{:.2f}", "R2": "{:.3f}"}),
+            use_container_width=True,
+            hide_index=True,
+        )
+
+
+def render_pipeline_section() -> None:
+    steps = [
+        ("Fetch", "Open-Meteo weather and pollutant data"),
+        ("Feature", "Lags, rolling windows, AQI change rate"),
+        ("Train", "Baseline, Ridge, and Random Forest models"),
+        ("Predict", "24h, 48h, and 72h AQI forecasts"),
+    ]
+    cards = "".join(
+        f"""
+        <div class="pipeline-step">
+            <div class="step-index">{index}</div>
+            <div class="step-title">{title}</div>
+            <div class="detail">{body}</div>
+        </div>
+        """
+        for index, (title, body) in enumerate(steps, start=1)
+    )
+    st.markdown('<div class="section-title">Automated pipeline</div>', unsafe_allow_html=True)
+    st.markdown(f'<div class="pipeline-grid">{cards}</div>', unsafe_allow_html=True)
 
 
 def main() -> None:
@@ -347,22 +605,13 @@ def main() -> None:
         st.error(f"Missing project data file: {exc.filename}")
         st.stop()
 
-    latest_row = raw_df.iloc[-1]
-    render_header(latest_row["time"])
-    render_current_snapshot(latest_row)
-
-    st.markdown("<div style='height:1.2rem;'></div>", unsafe_allow_html=True)
-    render_forecasts(predictions)
-
-    alert_rows = predictions[predictions["alert"] != "No hazardous AQI alert"]
-    if not alert_rows.empty:
-        st.error(alert_rows.iloc[0]["alert"])
-
-    st.markdown("<div style='height:1rem;'></div>", unsafe_allow_html=True)
-    render_trend(raw_df, predictions)
-
-    st.markdown("<div style='height:1rem;'></div>", unsafe_allow_html=True)
-    render_metrics(metrics)
+    render_sidebar(raw_df, predictions)
+    render_header(raw_df.iloc[-1]["time"])
+    render_overview(raw_df, predictions, metrics)
+    render_summary(raw_df, predictions)
+    render_charts(raw_df, predictions)
+    render_model_section(metrics)
+    render_pipeline_section()
 
 
 if __name__ == "__main__":
