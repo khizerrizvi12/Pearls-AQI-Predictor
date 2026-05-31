@@ -603,10 +603,11 @@ def render_explainability_section(feature_importance: pd.DataFrame) -> None:
 
     available_targets = list(feature_importance["target"].drop_duplicates())
     target_labels = {target: target.replace("target_aqi_", "").replace("h", " hour") for target in available_targets}
-    selected_label = st.segmented_control(
+    selected_label = st.radio(
         "Forecast horizon",
         options=[target_labels[target] for target in available_targets],
-        default=target_labels[available_targets[0]],
+        index=0,
+        horizontal=True,
     )
     selected_target = next(target for target, label in target_labels.items() if label == selected_label)
 
@@ -620,7 +621,7 @@ def render_explainability_section(feature_importance: pd.DataFrame) -> None:
         columns={"display_feature": "Feature", "importance": "Importance"}
     )
 
-    st.bar_chart(chart_df, x="Feature", y="Importance", horizontal=True, height=420)
+    st.bar_chart(chart_df, x="Feature", y="Importance", height=420)
     method = top_features["method"].iloc[0].replace("_", " ")
     st.caption(f"Explanation method: {method}. Higher values indicate stronger influence on the selected forecast model.")
 
