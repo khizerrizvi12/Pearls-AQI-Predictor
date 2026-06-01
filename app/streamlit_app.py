@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from pathlib import Path
 
+import matplotlib.pyplot as plt
 import pandas as pd
 import streamlit as st
 
@@ -556,13 +557,31 @@ def render_charts(raw_df: pd.DataFrame, predictions: pd.DataFrame) -> None:
         observed["Series"] = "Observed"
         forecast["Series"] = "Forecast"
         chart_df = pd.concat([observed, forecast], ignore_index=True)
-        st.line_chart(chart_df, x="Time", y="AQI", color="Series", height=360)
+        fig, ax = plt.subplots(figsize=(9, 4.1))
+        for series, color in [("Observed", "#2563eb"), ("Forecast", "#c69214")]:
+            subset = chart_df[chart_df["Series"] == series]
+            ax.plot(subset["Time"], subset["AQI"], marker="o", linewidth=2, markersize=3.5, label=series, color=color)
+        ax.set_ylabel("AQI")
+        ax.set_xlabel("")
+        ax.grid(True, alpha=0.22)
+        ax.legend(frameon=False, loc="upper left")
+        fig.autofmt_xdate()
+        st.pyplot(fig, use_container_width=True)
+        plt.close(fig)
 
     with right:
         st.markdown('<div class="section-title">Forecast by horizon</div>', unsafe_allow_html=True)
         bar_df = predictions[["horizon_hours", "predicted_aqi"]].copy()
         bar_df["horizon_hours"] = bar_df["horizon_hours"].astype(str) + "h"
-        st.bar_chart(bar_df, x="horizon_hours", y="predicted_aqi", height=360)
+        fig, ax = plt.subplots(figsize=(5.2, 4.1))
+        bars = ax.bar(bar_df["horizon_hours"], bar_df["predicted_aqi"], color="#0f766e", width=0.58)
+        ax.set_ylabel("Predicted AQI")
+        ax.set_xlabel("Forecast horizon")
+        ax.grid(True, axis="y", alpha=0.22)
+        for bar in bars:
+            ax.text(bar.get_x() + bar.get_width() / 2, bar.get_height() + 1, f"{bar.get_height():.1f}", ha="center", fontweight="bold")
+        st.pyplot(fig, use_container_width=True)
+        plt.close(fig)
 
 
 def render_model_section(metrics: pd.DataFrame) -> None:
@@ -621,7 +640,13 @@ def render_explainability_section(feature_importance: pd.DataFrame) -> None:
         columns={"display_feature": "Feature", "importance": "Importance"}
     )
 
-    st.bar_chart(chart_df, x="Feature", y="Importance", height=420)
+    fig, ax = plt.subplots(figsize=(9, 5.2))
+    ax.barh(chart_df["Feature"], chart_df["Importance"], color="#2563eb")
+    ax.set_xlabel("Importance")
+    ax.set_ylabel("")
+    ax.grid(True, axis="x", alpha=0.22)
+    st.pyplot(fig, use_container_width=True)
+    plt.close(fig)
     method = top_features["method"].iloc[0].replace("_", " ")
     st.caption(f"Explanation method: {method}. Higher values indicate stronger influence on the selected forecast model.")
 
