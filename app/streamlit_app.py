@@ -345,14 +345,14 @@ def inject_styles() -> None:
 
 
 @st.cache_data
-def load_raw_data() -> pd.DataFrame:
+def load_raw_data(modified_at: float) -> pd.DataFrame:
     df = pd.read_csv(RAW_DATA_PATH)
     df["time"] = pd.to_datetime(df["time"])
     return df.sort_values("time").reset_index(drop=True)
 
 
 @st.cache_data
-def load_predictions() -> pd.DataFrame:
+def load_predictions(modified_at: float) -> pd.DataFrame:
     df = pd.read_csv(PREDICTIONS_PATH)
     df["generated_at"] = pd.to_datetime(df["generated_at"])
     df["forecast_time"] = pd.to_datetime(df["forecast_time"])
@@ -360,12 +360,12 @@ def load_predictions() -> pd.DataFrame:
 
 
 @st.cache_data
-def load_metrics() -> pd.DataFrame:
+def load_metrics(modified_at: float) -> pd.DataFrame:
     return pd.read_csv(METRICS_PATH)
 
 
 @st.cache_data
-def load_feature_importance() -> pd.DataFrame:
+def load_feature_importance(modified_at: float) -> pd.DataFrame:
     if not FEATURE_IMPORTANCE_PATH.exists():
         return pd.DataFrame()
     return pd.read_csv(FEATURE_IMPORTANCE_PATH)
@@ -395,6 +395,10 @@ def format_number(value: float, decimals: int = 1) -> str:
 
 def render_html(html: str) -> None:
     st.markdown(html, unsafe_allow_html=True)
+
+
+def file_modified_at(path: Path) -> float:
+    return path.stat().st_mtime if path.exists() else 0.0
 
 
 def delta_label(current: float, previous: float) -> tuple[str, str]:
@@ -679,10 +683,10 @@ def main() -> None:
     inject_styles()
 
     try:
-        raw_df = load_raw_data()
-        predictions = load_predictions()
-        metrics = load_metrics()
-        feature_importance = load_feature_importance()
+        raw_df = load_raw_data(file_modified_at(RAW_DATA_PATH))
+        predictions = load_predictions(file_modified_at(PREDICTIONS_PATH))
+        metrics = load_metrics(file_modified_at(METRICS_PATH))
+        feature_importance = load_feature_importance(file_modified_at(FEATURE_IMPORTANCE_PATH))
     except FileNotFoundError as exc:
         st.error(f"Missing project data file: {exc.filename}")
         st.stop()

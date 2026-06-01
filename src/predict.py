@@ -11,9 +11,10 @@ import joblib
 import pandas as pd
 
 from config import DATA_DIR, MODELS_DIR
+from features import add_change_features, add_lag_features, add_rolling_features, add_time_features
 
 
-FEATURES_PATH = DATA_DIR / "processed" / "karachi_aqi_features.csv"
+RAW_DATA_PATH = DATA_DIR / "raw" / "karachi_weather_air_quality_hourly.csv"
 PREDICTIONS_PATH = DATA_DIR / "processed" / "latest_predictions.csv"
 BEST_MODELS_PATH = MODELS_DIR / "best_models.json"
 FEATURE_COLUMNS_PATH = MODELS_DIR / "feature_columns.json"
@@ -53,10 +54,16 @@ def alert_message(aqi: float) -> str:
     return "No hazardous AQI alert"
 
 
-def load_latest_feature_row(features_path: Path) -> pd.Series:
-    df = pd.read_csv(features_path)
+def load_latest_feature_row(raw_data_path: Path) -> pd.Series:
+    df = pd.read_csv(raw_data_path)
     df["time"] = pd.to_datetime(df["time"])
     df = df.sort_values("time").reset_index(drop=True)
+
+    df = add_time_features(df)
+    df = add_lag_features(df)
+    df = add_rolling_features(df)
+    df = add_change_features(df)
+    df = df.dropna().reset_index(drop=True)
     return df.iloc[-1]
 
 
@@ -109,7 +116,7 @@ def build_predictions(
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Generate latest AQI forecasts.")
-    parser.add_argument("--features", type=Path, default=FEATURES_PATH)
+    parser.add_argument("--raw-data", type=Path, default=RAW_DATA_PATH)
     parser.add_argument("--output", type=Path, default=PREDICTIONS_PATH)
     return parser.parse_args()
 
@@ -119,7 +126,7 @@ def main() -> None:
 
     best_models = load_json(BEST_MODELS_PATH)
     feature_columns = load_json(FEATURE_COLUMNS_PATH)
-    latest_row = load_latest_feature_row(args.features)
+    latest_row = load_latest_feature_row(args.raw_data)
 
     predictions = build_predictions(latest_row, best_models, feature_columns)
 
