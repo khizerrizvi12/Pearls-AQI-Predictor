@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from pathlib import Path
+from zoneinfo import ZoneInfo
 
 import matplotlib.pyplot as plt
 import pandas as pd
@@ -440,14 +441,15 @@ def render_sidebar(raw_df: pd.DataFrame, predictions: pd.DataFrame) -> None:
 
 
 def render_header(latest_time: pd.Timestamp) -> None:
+    updated_at = pd.Timestamp.now(tz=ZoneInfo("Asia/Karachi"))
     st.markdown(
         f"""
         <div class="topbar">
             <div>
                 <div class="brand-title">Karachi Air Quality Forecasting</div>
-                <div class="brand-subtitle">Operational dashboard for current AQI, pollutant conditions, and 3-day forecast signals.</div>
+                <div class="brand-subtitle">Operational dashboard for current AQI, pollutant conditions, and 3-day forecast signals. Latest observed AQI row: {latest_time:%d %b %Y, %I:%M %p}</div>
             </div>
-            <div class="run-status">Pipeline active | Latest AQI: {latest_time:%d %b, %I:%M %p}</div>
+            <div class="run-status">Pipeline active | Updated: {updated_at:%d %b, %I:%M %p}</div>
         </div>
         """,
         unsafe_allow_html=True,
