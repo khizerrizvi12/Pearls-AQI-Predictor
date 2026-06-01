@@ -54,6 +54,7 @@ python src/features.py
 python src/train.py
 python src/explain.py
 python src/predict.py
+python src/eda.py
 streamlit run app/streamlit_app.py
 ```
 
@@ -67,6 +68,11 @@ For Streamlit Community Cloud deployment, the repository includes a small dashbo
 - `data/processed/feature_importance.csv`
 
 These files allow the public dashboard to load immediately. The scheduled GitHub Actions workflows still generate fresh artifacts for pipeline runs.
+
+## Reports
+
+- [EDA summary](reports/eda_summary.md)
+- [Final report draft](reports/final_report.md)
 
 ## Automation
 
