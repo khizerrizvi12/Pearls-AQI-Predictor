@@ -2,6 +2,10 @@
 
 End-to-end Air Quality Index prediction system for forecasting AQI for the next 3 days.
 
+## Live Dashboard
+
+[Open the Streamlit AQI Dashboard](https://pearls-aqi-predictor-8eluvoxqdhfnpt5iyzfogl.streamlit.app)
+
 ## Project Goal
 
 Build a serverless AQI prediction pipeline that:
