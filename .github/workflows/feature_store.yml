@@ -1,0 +1,43 @@
+name: Build AQI Feature Store
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build-feature-store:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: "pip"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install -r requirements.txt
+          python -m pip install -r requirements-feature-store.txt
+
+      - name: Fetch latest AQI and weather data
+        run: python src/fetch_data.py
+
+      - name: Build model features
+        run: python src/features.py
+
+      - name: Build and verify Feast feature store
+        run: python src/feature_store.py
+
+      - name: Upload feature store artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: karachi-aqi-feature-store
+          path: |
+            feature_repo/data/karachi_aqi_features.parquet
+            feature_repo/data/registry.db
+            feature_repo/data/online_store.db
+            data/processed/feature_store_demo.json
+          if-no-files-found: error

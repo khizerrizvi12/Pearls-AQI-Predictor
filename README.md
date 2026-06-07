@@ -6,7 +6,7 @@ End-to-end Karachi Air Quality Index forecasting for the next 24, 48, and 72 hou
 
 ## Overview
 
-This project fetches hourly weather and pollutant data, creates forecasting features, compares three model approaches, generates three-day AQI forecasts, explains model drivers, and presents results in a deployed Streamlit dashboard.
+This project fetches hourly weather and pollutant data, creates forecasting features, stores reusable features in Feast, compares three model approaches, generates three-day AQI forecasts, explains model drivers, and presents results in a deployed Streamlit dashboard.
 
 ## Architecture
 
@@ -15,7 +15,8 @@ flowchart LR
     A["Open-Meteo APIs"] --> B["Data Fetch Pipeline"]
     B --> C["Raw Hourly Data"]
     C --> D["Feature Engineering"]
-    D --> E["Baseline / Ridge / Random Forest"]
+    D --> K["Feast Feature Store"]
+    K --> E["Baseline / Ridge / Random Forest"]
     E --> F["Model Evaluation"]
     E --> G["Feature Importance"]
     E --> H["24h / 48h / 72h Predictions"]
@@ -35,6 +36,7 @@ flowchart LR
 - Streamlit Community Cloud
 - GitHub Actions
 - Open-Meteo Weather and Air Quality APIs
+- Feast feature store with Parquet offline storage and SQLite online storage
 - Random Forest feature importance with optional SHAP support
 
 ## Current Results
@@ -75,6 +77,7 @@ data/                 Dashboard snapshot and generated pipeline data
 models/               Model metadata and local trained models
 reports/              Final report, EDA summary, and figures
 src/                  Data, feature, training, explanation, and prediction scripts
+feature_repo/         Feast definitions and generated local stores
 .github/workflows/    Hourly prediction and daily training automation
 ```
 
@@ -87,6 +90,7 @@ python -m pip install -r requirements.txt
 
 python src\fetch_data.py
 python src\features.py
+python src\feature_store.py
 python src\train.py
 python src\explain.py
 python src\predict.py
@@ -98,14 +102,38 @@ python -m streamlit run app\streamlit_app.py
 
 Open `http://localhost:8501`.
 
+## Feature Store
+
+The project includes a local Feast feature store for reproducible training and
+online inference features. It uses:
+
+- `karachi` as the entity with `city_id` as its join key
+- Parquet as the offline historical store
+- SQLite as the online low-latency store
+- 13 AQI, pollutant, weather, lag, rolling, and change features
+- `aqi_forecast_service` as the shared model feature service
+
+Install and build it after generating the processed feature CSV:
+
+```powershell
+python -m pip install -r requirements-feature-store.txt
+python src\features.py
+python src\feature_store.py
+```
+
+The command registers the definitions, materializes the online store, performs
+historical and online lookups, and writes a verification result to
+`data/processed/feature_store_demo.json`.
+
 ## Automation
 
-Two GitHub Actions workflows are included:
+Three GitHub Actions workflows are included:
 
 - **Hourly AQI Predictions:** refreshes data/features and generates forecasts.
 - **Daily AQI Model Training:** refreshes data, retrains models, creates explanations, and generates forecasts.
+- **Build AQI Feature Store:** manually builds, materializes, verifies, and uploads the Feast store artifacts.
 
-Both workflows upload generated CSV and model files as downloadable artifacts.
+The workflows upload generated data, model, and feature-store files as downloadable artifacts.
 
 ## Reports
 
@@ -119,4 +147,4 @@ Both workflows upload generated CSV and model files as downloadable artifacts.
 
 - The public Streamlit app uses a committed data snapshot so it can open immediately.
 - GitHub Actions generate fresher artifacts, but do not currently write them back to the deployed app.
-- A feature store/model registry and longer historical dataset are documented as future improvements rather than claimed as completed work.
+- A local Feast feature store is implemented. A production model registry and longer historical dataset remain future improvements.

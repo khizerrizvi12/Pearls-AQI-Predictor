@@ -22,3 +22,7 @@ models/*.joblib
 models/*.pkl
 
 .streamlit/secrets.toml
+
+.feast_metrics/
+feature_repo/data/
+data/registry.db

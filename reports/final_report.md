@@ -4,7 +4,7 @@
 
 Pearls AQI Predictor is an end-to-end air quality forecasting system for Karachi, Pakistan. The project predicts Air Quality Index values for the next 24, 48, and 72 hours using recent pollutant, weather, and time-based features.
 
-The system includes data fetching, feature engineering, model training, prediction generation, model explanation, dashboard visualization, and GitHub Actions automation.
+The system includes data fetching, feature engineering, a Feast feature store, model training, prediction generation, model explanation, dashboard visualization, and GitHub Actions automation.
 
 ## 2. Problem Statement
 
@@ -51,6 +51,8 @@ src/features.py
       v
 Training feature dataset
       |
+      +--> src/feature_store.py --> Feast offline + online stores
+      |
       +--> src/train.py --> trained models + metrics
       |
       +--> src/explain.py --> feature importance
@@ -81,7 +83,28 @@ The feature engineering pipeline creates:
 
 The processed training dataset contains 2,040 clean rows and 188 columns.
 
-## 6. Exploratory Data Analysis
+## 6. Feature Store
+
+The project implements Feast as a local feature store. It separates feature
+definitions and serving from model code so the same named features can be used
+for historical training retrieval and online inference retrieval.
+
+Feature store components:
+
+- Entity: `karachi`, joined using `city_id`
+- Feature view: `karachi_aqi_hourly`
+- Feature service: `aqi_forecast_service`
+- Offline store: Parquet
+- Online store: SQLite
+- Registry: local Feast registry
+- Stored features: 13 AQI, pollutant, weather, lag, rolling, and change signals
+
+`src/feature_store.py` converts the processed feature CSV to event-timestamped
+Parquet, applies the Feast definitions, materializes the online store, and
+verifies both historical and online lookups. A manual GitHub Actions workflow
+also builds and uploads the feature store artifacts.
+
+## 7. Exploratory Data Analysis
 
 EDA found:
 
@@ -114,7 +137,7 @@ Generated EDA figures:
 
 ![Pollutant trends](figures/pollutant_trends.png)
 
-## 7. Models Used
+## 8. Models Used
 
 Three model approaches were used:
 
@@ -124,7 +147,7 @@ Three model approaches were used:
 | Ridge Regression | Linear regularized model |
 | Random Forest Regressor | Non-linear tree-based model |
 
-## 8. Model Evaluation
+## 9. Model Evaluation
 
 Evaluation used a time-based train/test split to avoid future leakage. Metrics used:
 
@@ -148,7 +171,7 @@ Results:
 
 The current-AQI baseline performed best at 24 hours. Random Forest performed best among the tested models at 48 and 72 hours. The negative R2 values at longer horizons indicate that the current 90-day dataset is not sufficient for strong long-range forecasting.
 
-## 9. Latest Forecast Snapshot
+## 10. Latest Forecast Snapshot
 
 The final forecast snapshot was generated from the 06 Jun 2026, 11:00 PM observation.
 
@@ -158,7 +181,7 @@ The final forecast snapshot was generated from the 06 Jun 2026, 11:00 PM observa
 | 48h | 08 Jun 2026, 11:00 PM | Random Forest | 78 | 72.35 | Moderate |
 | 72h | 09 Jun 2026, 11:00 PM | Random Forest | 78 | 92.03 | Moderate |
 
-## 10. Explainability
+## 11. Explainability
 
 The project includes `src/explain.py`, which generates feature importance values for forecast models.
 
@@ -174,7 +197,7 @@ The selected 24h model is the baseline and does not expose tree-based feature im
 
 These values are displayed in the dashboard under the Forecast drivers section.
 
-## 11. Dashboard
+## 12. Dashboard
 
 The Streamlit dashboard includes:
 
@@ -190,35 +213,39 @@ Live dashboard:
 
 https://pearls-aqi-predictor-8eluvoxqdhfnpt5iyzfogl.streamlit.app
 
-## 12. Automation
+## 13. Automation
 
-The project includes two GitHub Actions workflows:
+The project includes three GitHub Actions workflows:
 
 | Workflow | Purpose |
 | --- | --- |
 | Hourly AQI Predictions | Fetch data, build features, create fallback models if needed, explain models, and generate predictions |
 | Daily AQI Model Training | Fetch data, build features, train models, explain models, and generate predictions |
+| Build AQI Feature Store | Build, materialize, verify, and upload the local Feast store |
 
-Both workflows were manually tested successfully. Artifacts are uploaded after workflow runs.
+The hourly and daily workflows were manually tested successfully. The feature-store
+workflow is reproducible through the same verified local command. Artifacts are
+uploaded after workflow runs.
 
-## 13. Limitations
+## 14. Limitations
 
 - The current model uses around 3 months of data.
 - Longer historical data would improve seasonal learning.
 - The deployed dashboard uses a committed data snapshot for easy public demo access.
-- A production version should use a feature store and model registry.
+- The local Feast implementation should use a managed online store at larger production scale.
+- A production model registry is not yet implemented.
 - The 48h and 72h forecasts have negative R2 values on the latest test window.
 
-## 14. Future Work
+## 15. Future Work
 
 - Add 1-2 years of historical training data.
-- Integrate Hopsworks Feature Store.
+- Move the local Feast registry and online store to managed cloud infrastructure.
 - Store trained models in a proper model registry.
 - Add full SHAP visualizations.
 - Add multi-city support.
 - Improve model selection with XGBoost or LightGBM.
 - Deploy an automated data refresh backend for Streamlit Cloud.
 
-## 15. Conclusion
+## 16. Conclusion
 
-The project successfully implements an end-to-end AQI prediction system with data ingestion, feature engineering, model training, prediction generation, explainability, automation, and dashboard deployment. The latest evaluation demonstrates that model selection changes by horizon and data window: the baseline is strongest at 24 hours, while Random Forest is selected at 48 and 72 hours. Longer historical coverage is the most important next step for improving forecast reliability.
+The project successfully implements an end-to-end AQI prediction system with data ingestion, feature engineering, feature storage, model training, prediction generation, explainability, automation, and dashboard deployment. The latest evaluation demonstrates that model selection changes by horizon and data window: the baseline is strongest at 24 hours, while Random Forest is selected at 48 and 72 hours. Longer historical coverage is the most important next step for improving forecast reliability.
