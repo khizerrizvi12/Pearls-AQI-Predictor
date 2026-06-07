@@ -273,7 +273,7 @@ def export_report(markdown_path: Path, output_path: Path) -> None:
         Spacer(1, 0.7 * cm),
         Paragraph("Karachi Air Quality Forecasting for 24, 48, and 72 Hours", styles["subtitle"]),
         Spacer(1, 1.4 * cm),
-        Paragraph("Final submission: June 7, 2026", styles["subtitle"]),
+        Paragraph("Created by: Syed Khizer Abbas Rizvi", styles["subtitle"]),
         PageBreak(),
     ]
     markdown_text = markdown_path.read_text(encoding="utf-8")
