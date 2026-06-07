@@ -133,7 +133,9 @@ Three GitHub Actions workflows are included:
 - **Daily AQI Model Training:** refreshes data, retrains models, creates explanations, and generates forecasts.
 - **Build AQI Feature Store:** manually builds, materializes, verifies, and uploads the Feast store artifacts.
 
-The workflows upload generated data, model, and feature-store files as downloadable artifacts.
+The hourly and daily workflows commit the latest dashboard snapshot back to
+`main`, which triggers Streamlit Community Cloud to redeploy automatically.
+They also upload generated data and model files as downloadable artifacts.
 
 ## Reports
 
