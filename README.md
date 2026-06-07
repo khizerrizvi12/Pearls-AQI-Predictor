@@ -1,84 +1,122 @@
-# AQI Predictor
+# Pearls AQI Predictor
 
-End-to-end Air Quality Index prediction system for forecasting AQI for the next 3 days.
+End-to-end Karachi Air Quality Index forecasting for the next 24, 48, and 72 hours.
 
-## Live Dashboard
+[Open Live Dashboard](https://pearls-aqi-predictor-8eluvoxqdhfnpt5iyzfogl.streamlit.app) | [Read Final Report](reports/final_report.md) | [View EDA Summary](reports/eda_summary.md)
 
-[Open the Streamlit AQI Dashboard](https://pearls-aqi-predictor-8eluvoxqdhfnpt5iyzfogl.streamlit.app)
+## Overview
 
-## Project Goal
+This project fetches hourly weather and pollutant data, creates forecasting features, compares three model approaches, generates three-day AQI forecasts, explains model drivers, and presents results in a deployed Streamlit dashboard.
 
-Build a serverless AQI prediction pipeline that:
+## Architecture
 
-- fetches weather and pollutant data,
-- creates model-ready features,
-- trains forecasting models,
-- automates feature and training pipelines,
-- shows real-time and forecasted AQI in a dashboard.
+```mermaid
+flowchart LR
+    A["Open-Meteo APIs"] --> B["Data Fetch Pipeline"]
+    B --> C["Raw Hourly Data"]
+    C --> D["Feature Engineering"]
+    D --> E["Baseline / Ridge / Random Forest"]
+    E --> F["Model Evaluation"]
+    E --> G["Feature Importance"]
+    E --> H["24h / 48h / 72h Predictions"]
+    F --> I["Streamlit Dashboard"]
+    G --> I
+    H --> I
+    J["GitHub Actions"] --> B
+    J --> E
+```
 
-## Planned Stack
+## Implemented Stack
 
-- Python
+- Python 3.12
 - Pandas and NumPy
 - Scikit-learn
-- Streamlit
-- Hopsworks Feature Store
+- Matplotlib
+- Streamlit Community Cloud
 - GitHub Actions
-- SHAP
-- Random Forest feature importance / optional SHAP explanations
+- Open-Meteo Weather and Air Quality APIs
+- Random Forest feature importance with optional SHAP support
+
+## Current Results
+
+Training uses a chronological 80/20 split.
+
+| Horizon | Selected Model | MAE | RMSE | R2 |
+| --- | --- | ---: | ---: | ---: |
+| 24h | Current AQI baseline | 8.90 | 11.30 | 0.492 |
+| 48h | Random Forest | 12.77 | 17.04 | -0.191 |
+| 72h | Random Forest | 14.87 | 20.55 | -0.841 |
+
+The 24-hour baseline is strongest on the latest 90-day window. Random Forest performs best among the tested models at 48 and 72 hours, but negative long-range R2 values show that more historical data is needed.
+
+Latest committed demo forecast:
+
+| Horizon | Forecast Time | Predicted AQI | Category |
+| --- | --- | ---: | --- |
+| 24h | 07 Jun 2026, 11:00 PM | 78.00 | Moderate |
+| 48h | 08 Jun 2026, 11:00 PM | 72.35 | Moderate |
+| 72h | 09 Jun 2026, 11:00 PM | 92.03 | Moderate |
+
+## Features
+
+- Hour, weekday, day, month, and weekend indicators
+- AQI, pollutant, and weather lags from 1 to 72 hours
+- Rolling means and standard deviations from 3 to 72 hours
+- AQI and particulate change features
+- Separate 24h, 48h, and 72h targets
+- AQI category and hazardous-level alerts
+- Model metrics and forecast-driver visualization
 
 ## Project Structure
 
 ```text
-aqi-predictor/
-  app/                  Streamlit dashboard
-  data/                 Local raw/processed data, ignored by Git
-  models/               Saved trained models, ignored by Git
-  notebooks/            EDA and experiments
-  reports/              Final report assets
-  src/                  Data, feature, training, and prediction scripts
-  .github/workflows/    Automation workflows
+app/                  Streamlit dashboard
+data/                 Dashboard snapshot and generated pipeline data
+models/               Model metadata and local trained models
+reports/              Final report, EDA summary, and figures
+src/                  Data, feature, training, explanation, and prediction scripts
+.github/workflows/    Hourly prediction and daily training automation
 ```
 
-## First Milestone
+## Run Locally
 
-Create a local pipeline that fetches AQI data for one city, builds features, trains a baseline model, and displays predictions in Streamlit.
+```powershell
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1
+python -m pip install -r requirements.txt
 
-## Local Pipeline
+python src\fetch_data.py
+python src\features.py
+python src\train.py
+python src\explain.py
+python src\predict.py
+python src\eda.py
+python src\export_report.py
 
-Run the project pipeline from the repository root:
-
-```bash
-python src/fetch_data.py
-python src/features.py
-python src/train.py
-python src/explain.py
-python src/predict.py
-python src/eda.py
-streamlit run app/streamlit_app.py
+python -m streamlit run app\streamlit_app.py
 ```
 
-The explainability step generates `data/processed/feature_importance.csv`, which is shown in the dashboard as forecast drivers.
-
-For Streamlit Community Cloud deployment, the repository includes a small dashboard snapshot:
-
-- `data/raw/karachi_weather_air_quality_hourly.csv`
-- `data/processed/latest_predictions.csv`
-- `data/processed/model_metrics.csv`
-- `data/processed/feature_importance.csv`
-
-These files allow the public dashboard to load immediately. The scheduled GitHub Actions workflows still generate fresh artifacts for pipeline runs.
-
-## Reports
-
-- [EDA summary](reports/eda_summary.md)
-- [Final report draft](reports/final_report.md)
+Open `http://localhost:8501`.
 
 ## Automation
 
-GitHub Actions workflows are included for scheduled pipeline runs:
+Two GitHub Actions workflows are included:
 
-- `Hourly AQI Predictions`: fetches data, builds features, creates fallback models if needed, explains models, and generates predictions every hour.
-- `Daily AQI Model Training`: fetches data, builds features, trains models, explains models, and generates predictions once per day.
+- **Hourly AQI Predictions:** refreshes data/features and generates forecasts.
+- **Daily AQI Model Training:** refreshes data, retrains models, creates explanations, and generates forecasts.
 
-Generated CSV and model files are uploaded as workflow artifacts. Because this starter version does not yet use a model registry, the hourly workflow trains fallback models if saved model artifacts are not present on the fresh runner. In a production version, these outputs should be written to a feature store and model registry.
+Both workflows upload generated CSV and model files as downloadable artifacts.
+
+## Reports
+
+- [Final project report](reports/final_report.md)
+- [Final report PDF](reports/Pearls_AQI_Predictor_Final_Report.pdf)
+- [EDA summary](reports/eda_summary.md)
+- [Submission checklist](reports/submission_checklist.md)
+- [EDA figures](reports/figures)
+
+## Scope Notes
+
+- The public Streamlit app uses a committed data snapshot so it can open immediately.
+- GitHub Actions generate fresher artifacts, but do not currently write them back to the deployed app.
+- A feature store/model registry and longer historical dataset are documented as future improvements rather than claimed as completed work.

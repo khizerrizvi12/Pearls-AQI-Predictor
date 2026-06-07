@@ -410,11 +410,12 @@ def delta_label(current: float, previous: float) -> tuple[str, str]:
     return "0", "from previous hour"
 
 
-def latest_metric(metrics: pd.DataFrame, target: str, model: str, metric: str) -> float | None:
-    rows = metrics[(metrics["target"] == target) & (metrics["model"] == model)]
+def best_metric(metrics: pd.DataFrame, target: str, metric: str) -> tuple[str, float] | None:
+    rows = metrics[metrics["target"] == target].sort_values(metric)
     if rows.empty:
         return None
-    return float(rows.iloc[0][metric])
+    best_row = rows.iloc[0]
+    return str(best_row["model"]), float(best_row[metric])
 
 
 def render_sidebar(raw_df: pd.DataFrame, predictions: pd.DataFrame) -> None:
@@ -467,13 +468,15 @@ def render_overview(raw_df: pd.DataFrame, predictions: pd.DataFrame, metrics: pd
     category = aqi_category(current_aqi)
     aqi_delta, delta_caption = delta_label(current_aqi, float(previous["us_aqi"]))
     max_forecast = float(predictions["predicted_aqi"].max())
-    best_24h_rmse = latest_metric(metrics, "target_aqi_24h", "random_forest", "rmse")
+    best_24h = best_metric(metrics, "target_aqi_24h", "rmse")
+    best_24h_model = best_24h[0].replace("_", " ") if best_24h else "N/A"
+    best_24h_rmse = best_24h[1] if best_24h else None
 
     cols = st.columns(4, gap="medium")
     cols[0].metric("Current AQI", f"{current_aqi:.0f}", delta=aqi_delta, help=delta_caption)
     cols[1].metric("Condition", category)
     cols[2].metric("Peak Forecast", f"{max_forecast:.1f}")
-    cols[3].metric("24h RF RMSE", f"{best_24h_rmse:.2f}" if best_24h_rmse is not None else "N/A")
+    cols[3].metric("24h Best RMSE", f"{best_24h_rmse:.2f}" if best_24h_rmse is not None else "N/A", help=best_24h_model)
 
 
 def render_summary(raw_df: pd.DataFrame, predictions: pd.DataFrame) -> None:

@@ -17,7 +17,7 @@ The project uses Open-Meteo APIs for Karachi:
 - Weather archive data
 - Air quality and pollutant data
 
-The local dashboard snapshot contains 2,184 hourly rows from 02 Mar 2026 to 31 May 2026.
+The final dashboard snapshot contains 2,184 hourly rows from 08 Mar 2026 to 06 Jun 2026.
 
 Main variables:
 
@@ -87,7 +87,7 @@ EDA found:
 
 - Rows analyzed: 2,184
 - Missing values: 0
-- Mean AQI: 79.56
+- Mean AQI: 80.01
 - Minimum AQI: 32
 - Maximum AQI: 161
 
@@ -96,8 +96,8 @@ AQI category counts:
 | Category | Count |
 | --- | ---: |
 | Good | 57 |
-| Moderate | 1,800 |
-| Unhealthy for Sensitive Groups | 321 |
+| Moderate | 1,807 |
+| Unhealthy for Sensitive Groups | 314 |
 | Unhealthy | 6 |
 | Very Unhealthy | 0 |
 | Hazardous | 0 |
@@ -136,27 +136,27 @@ Results:
 
 | Target | Model | MAE | RMSE | R2 |
 | --- | --- | ---: | ---: | ---: |
-| 24h | Random Forest | 10.66 | 13.68 | 0.437 |
-| 24h | Current AQI baseline | 11.88 | 15.98 | 0.232 |
-| 24h | Ridge | 13.54 | 18.77 | -0.060 |
-| 48h | Random Forest | 10.93 | 15.88 | 0.227 |
-| 48h | Current AQI baseline | 12.21 | 16.58 | 0.157 |
-| 48h | Ridge | 16.60 | 22.83 | -0.597 |
-| 72h | Current AQI baseline | 12.58 | 16.63 | -0.131 |
-| 72h | Random Forest | 14.59 | 18.48 | -0.396 |
-| 72h | Ridge | 17.93 | 22.31 | -1.036 |
+| 24h | Current AQI baseline | 8.90 | 11.30 | 0.492 |
+| 24h | Random Forest | 9.20 | 12.16 | 0.412 |
+| 24h | Ridge | 10.34 | 13.72 | 0.251 |
+| 48h | Random Forest | 12.77 | 17.04 | -0.191 |
+| 48h | Current AQI baseline | 14.78 | 19.54 | -0.566 |
+| 48h | Ridge | 16.33 | 20.39 | -0.706 |
+| 72h | Random Forest | 14.87 | 20.55 | -0.841 |
+| 72h | Current AQI baseline | 19.09 | 24.89 | -1.701 |
+| 72h | Ridge | 30.86 | 34.68 | -4.244 |
 
-The Random Forest model performed best for the 24h and 48h horizons. The baseline performed best for the 72h horizon, which indicates that more historical data is needed for stronger long-range forecasting.
+The current-AQI baseline performed best at 24 hours. Random Forest performed best among the tested models at 48 and 72 hours. The negative R2 values at longer horizons indicate that the current 90-day dataset is not sufficient for strong long-range forecasting.
 
 ## 9. Latest Forecast Snapshot
 
-The latest local forecast was generated from the 31 May 2026, 11:00 PM observation.
+The final forecast snapshot was generated from the 06 Jun 2026, 11:00 PM observation.
 
 | Horizon | Forecast Time | Model | Current AQI | Predicted AQI | Category |
 | --- | --- | --- | ---: | ---: | --- |
-| 24h | 01 Jun 2026, 11:00 PM | Random Forest | 67 | 84.96 | Moderate |
-| 48h | 02 Jun 2026, 11:00 PM | Random Forest | 67 | 71.13 | Moderate |
-| 72h | 03 Jun 2026, 11:00 PM | Current AQI baseline | 67 | 67.00 | Moderate |
+| 24h | 07 Jun 2026, 11:00 PM | Current AQI baseline | 78 | 78.00 | Moderate |
+| 48h | 08 Jun 2026, 11:00 PM | Random Forest | 78 | 72.35 | Moderate |
+| 72h | 09 Jun 2026, 11:00 PM | Random Forest | 78 | 92.03 | Moderate |
 
 ## 10. Explainability
 
@@ -164,13 +164,13 @@ The project includes `src/explain.py`, which generates feature importance values
 
 For the local environment, Random Forest feature importance is used. The script is also written to use SHAP when SHAP is installed and available.
 
-Top drivers for the 24h Random Forest model include:
+The selected 24h model is the baseline and does not expose tree-based feature importance. Top drivers for the 48h Random Forest model include:
 
-- US AQI
-- PM2.5
 - Day of month
-- PM2.5 rolling mean over 24h
-- PM2.5 rolling standard deviation over 72h
+- Wind speed rolling mean over 48h
+- PM2.5 rolling mean over 6h
+- Temperature rolling mean over 48h
+- PM10 rolling mean over 72h
 
 These values are displayed in the dashboard under the Forecast drivers section.
 
@@ -207,7 +207,7 @@ Both workflows were manually tested successfully. Artifacts are uploaded after w
 - Longer historical data would improve seasonal learning.
 - The deployed dashboard uses a committed data snapshot for easy public demo access.
 - A production version should use a feature store and model registry.
-- The 72h forecast is weaker than the 24h and 48h forecasts.
+- The 48h and 72h forecasts have negative R2 values on the latest test window.
 
 ## 14. Future Work
 
@@ -221,4 +221,4 @@ Both workflows were manually tested successfully. Artifacts are uploaded after w
 
 ## 15. Conclusion
 
-The project successfully implements an end-to-end AQI prediction system with data ingestion, feature engineering, model training, prediction generation, explainability, automation, and dashboard deployment. The 24h and 48h Random Forest forecasts improve over the baseline, while the 72h forecast highlights the need for more historical data.
+The project successfully implements an end-to-end AQI prediction system with data ingestion, feature engineering, model training, prediction generation, explainability, automation, and dashboard deployment. The latest evaluation demonstrates that model selection changes by horizon and data window: the baseline is strongest at 24 hours, while Random Forest is selected at 48 and 72 hours. Longer historical coverage is the most important next step for improving forecast reliability.
