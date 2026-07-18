@@ -1,5 +1,5 @@
 {
   "target_aqi_24h": "random_forest",
-  "target_aqi_48h": "random_forest",
+  "target_aqi_48h": "current_aqi_baseline",
   "target_aqi_72h": "random_forest"
 }
