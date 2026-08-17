@@ -1,4 +1,4 @@
 generated_at,forecast_time,horizon_hours,model,current_aqi,predicted_aqi,aqi_category,alert
-2026-08-16 23:00:00,2026-08-17 23:00:00,24,random_forest,71,73.04,Moderate,No hazardous AQI alert
+2026-08-16 23:00:00,2026-08-17 23:00:00,24,random_forest,71,73.03,Moderate,No hazardous AQI alert
 2026-08-16 23:00:00,2026-08-18 23:00:00,48,current_aqi_baseline,71,71.0,Moderate,No hazardous AQI alert
 2026-08-16 23:00:00,2026-08-19 23:00:00,72,current_aqi_baseline,71,71.0,Moderate,No hazardous AQI alert
