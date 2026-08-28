@@ -1,367 +1,184 @@
 target,model,feature,display_feature,importance,method,rank
-target_aqi_48h,random_forest,day_of_month,Day of month,2.8814989574492405,mean_abs_shap,1
-target_aqi_48h,random_forest,temperature_2m_rolling_mean_72h,Temperature rolling mean 72h,0.9836338430669359,mean_abs_shap,2
-target_aqi_48h,random_forest,us_aqi_rolling_mean_72h,US AQI rolling mean 72h,0.7990748649374017,mean_abs_shap,3
-target_aqi_48h,random_forest,pressure_msl,Pressure,0.6139324018953844,mean_abs_shap,4
-target_aqi_48h,random_forest,temperature_2m_rolling_mean_24h,Temperature rolling mean 24h,0.5750009504875698,mean_abs_shap,5
-target_aqi_48h,random_forest,pressure_msl_lag_1h,Pressure lag 1h,0.5024275420932588,mean_abs_shap,6
-target_aqi_48h,random_forest,us_aqi_lag_48h,US AQI lag 48h,0.4943192901929073,mean_abs_shap,7
-target_aqi_48h,random_forest,pm10_rolling_mean_72h,PM10 rolling mean 72h,0.48861224193393055,mean_abs_shap,8
-target_aqi_48h,random_forest,wind_speed_10m_rolling_mean_72h,Wind speed rolling mean 72h,0.4335059464361357,mean_abs_shap,9
-target_aqi_48h,random_forest,day_of_week,Day of week,0.36054946547857863,mean_abs_shap,10
-target_aqi_48h,random_forest,pressure_msl_lag_3h,Pressure lag 3h,0.3503002856617908,mean_abs_shap,11
-target_aqi_48h,random_forest,temperature_2m_rolling_std_48h,Temperature rolling std 48h,0.32598275525306153,mean_abs_shap,12
-target_aqi_48h,random_forest,pressure_msl_lag_6h,Pressure lag 6h,0.3206656723056854,mean_abs_shap,13
-target_aqi_48h,random_forest,temperature_2m_rolling_mean_48h,Temperature rolling mean 48h,0.3127938607585417,mean_abs_shap,14
-target_aqi_48h,random_forest,pm10_rolling_mean_24h,PM10 rolling mean 24h,0.2123016049264341,mean_abs_shap,15
-target_aqi_48h,random_forest,us_aqi_lag_72h,US AQI lag 72h,0.20889409781244606,mean_abs_shap,16
-target_aqi_48h,random_forest,wind_speed_10m_rolling_mean_24h,Wind speed rolling mean 24h,0.18944944180605489,mean_abs_shap,17
-target_aqi_48h,random_forest,wind_speed_10m_rolling_mean_48h,Wind speed rolling mean 48h,0.1803287015710711,mean_abs_shap,18
-target_aqi_48h,random_forest,us_aqi_rolling_std_72h,US AQI rolling std 72h,0.1730629256831553,mean_abs_shap,19
-target_aqi_48h,random_forest,us_aqi_rolling_mean_24h,US AQI rolling mean 24h,0.13787008933170286,mean_abs_shap,20
-target_aqi_48h,random_forest,pm2_5_rolling_std_48h,PM2.5 rolling std 48h,0.13384898730049616,mean_abs_shap,21
-target_aqi_48h,random_forest,pm2_5_rolling_mean_48h,PM2.5 rolling mean 48h,0.12445123397278285,mean_abs_shap,22
-target_aqi_48h,random_forest,pm10_rolling_std_48h,PM10 rolling std 48h,0.12405884399828272,mean_abs_shap,23
-target_aqi_48h,random_forest,temperature_2m_rolling_std_72h,Temperature rolling std 72h,0.11085986203362459,mean_abs_shap,24
-target_aqi_48h,random_forest,wind_speed_10m_rolling_std_72h,Wind speed rolling std 72h,0.1104684238627111,mean_abs_shap,25
-target_aqi_48h,random_forest,is_weekend,is weekend,0.10187447005256581,mean_abs_shap,26
-target_aqi_48h,random_forest,wind_speed_10m_rolling_mean_12h,Wind speed rolling mean 12h,0.0938376652903788,mean_abs_shap,27
-target_aqi_48h,random_forest,pm2_5_rolling_std_72h,PM2.5 rolling std 72h,0.09140876476188259,mean_abs_shap,28
-target_aqi_48h,random_forest,temperature_2m_rolling_std_24h,Temperature rolling std 24h,0.07851471831417113,mean_abs_shap,29
-target_aqi_48h,random_forest,pm2_5_rolling_mean_72h,PM2.5 rolling mean 72h,0.0689866068682922,mean_abs_shap,30
-target_aqi_48h,random_forest,pm10_rolling_std_72h,PM10 rolling std 72h,0.06284134157854149,mean_abs_shap,31
-target_aqi_48h,random_forest,pm2_5_rolling_mean_24h,PM2.5 rolling mean 24h,0.05270859861339971,mean_abs_shap,32
-target_aqi_48h,random_forest,pm10_rolling_mean_48h,PM10 rolling mean 48h,0.05030106329568645,mean_abs_shap,33
-target_aqi_48h,random_forest,us_aqi_lag_12h,US AQI lag 12h,0.04547917088895835,mean_abs_shap,34
-target_aqi_48h,random_forest,pm2_5_rolling_std_24h,PM2.5 rolling std 24h,0.04349880974307684,mean_abs_shap,35
-target_aqi_48h,random_forest,pressure_msl_lag_72h,Pressure lag 72h,0.043223146153878574,mean_abs_shap,36
-target_aqi_48h,random_forest,pressure_msl_lag_12h,Pressure lag 12h,0.04219018742701709,mean_abs_shap,37
-target_aqi_48h,random_forest,aqi_change_24h,AQI change 24h,0.03724681970685838,mean_abs_shap,38
-target_aqi_48h,random_forest,pressure_msl_lag_24h,Pressure lag 24h,0.03484882533348314,mean_abs_shap,39
-target_aqi_48h,random_forest,pm2_5_rolling_std_12h,PM2.5 rolling std 12h,0.03207721398825076,mean_abs_shap,40
-target_aqi_48h,random_forest,pm10_rolling_std_24h,PM10 rolling std 24h,0.02951144310135636,mean_abs_shap,41
-target_aqi_48h,random_forest,sulphur_dioxide_lag_1h,SO2 lag 1h,0.0238564688297067,mean_abs_shap,42
-target_aqi_48h,random_forest,us_aqi_rolling_std_48h,US AQI rolling std 48h,0.02366567766183153,mean_abs_shap,43
-target_aqi_48h,random_forest,wind_speed_10m_rolling_mean_6h,Wind speed rolling mean 6h,0.022461977757931684,mean_abs_shap,44
-target_aqi_48h,random_forest,sulphur_dioxide,SO2,0.022337170317043183,mean_abs_shap,45
-target_aqi_48h,random_forest,us_aqi_rolling_mean_6h,US AQI rolling mean 6h,0.020610181495079438,mean_abs_shap,46
-target_aqi_48h,random_forest,temperature_2m_rolling_mean_12h,Temperature rolling mean 12h,0.019628972454180795,mean_abs_shap,47
-target_aqi_48h,random_forest,us_aqi_rolling_mean_12h,US AQI rolling mean 12h,0.018295945707608337,mean_abs_shap,48
-target_aqi_48h,random_forest,us_aqi_rolling_mean_48h,US AQI rolling mean 48h,0.017276203093281744,mean_abs_shap,49
-target_aqi_48h,random_forest,us_aqi_lag_24h,US AQI lag 24h,0.016969624549605912,mean_abs_shap,50
-target_aqi_48h,random_forest,us_aqi_rolling_mean_3h,US AQI rolling mean 3h,0.016926151209134446,mean_abs_shap,51
-target_aqi_48h,random_forest,pm10_rolling_std_12h,PM10 rolling std 12h,0.016398519304682592,mean_abs_shap,52
-target_aqi_48h,random_forest,wind_speed_10m_rolling_std_48h,Wind speed rolling std 48h,0.015237627610952839,mean_abs_shap,53
-target_aqi_48h,random_forest,wind_speed_10m_rolling_std_24h,Wind speed rolling std 24h,0.01433869460705046,mean_abs_shap,54
-target_aqi_48h,random_forest,us_aqi_rolling_std_24h,US AQI rolling std 24h,0.01425782588220757,mean_abs_shap,55
-target_aqi_48h,random_forest,us_aqi_lag_1h,US AQI lag 1h,0.013033477205637255,mean_abs_shap,56
-target_aqi_48h,random_forest,us_aqi,US AQI,0.011914979254360103,mean_abs_shap,57
-target_aqi_48h,random_forest,wind_direction_10m_lag_12h,Wind direction lag 12h,0.010900776095322858,mean_abs_shap,58
-target_aqi_48h,random_forest,sulphur_dioxide_lag_72h,SO2 lag 72h,0.009967353804720084,mean_abs_shap,59
-target_aqi_48h,random_forest,pressure_msl_lag_48h,Pressure lag 48h,0.009840788998967284,mean_abs_shap,60
-target_aqi_48h,random_forest,sulphur_dioxide_lag_3h,SO2 lag 3h,0.009532416016927878,mean_abs_shap,61
-target_aqi_48h,random_forest,us_aqi_rolling_std_12h,US AQI rolling std 12h,0.008915778051250099,mean_abs_shap,62
-target_aqi_48h,random_forest,month,month,0.00833816035190232,mean_abs_shap,63
-target_aqi_48h,random_forest,pm10_rolling_mean_12h,PM10 rolling mean 12h,0.007928465293129476,mean_abs_shap,64
-target_aqi_48h,random_forest,us_aqi_lag_3h,US AQI lag 3h,0.00750764374661162,mean_abs_shap,65
-target_aqi_48h,random_forest,wind_speed_10m_lag_72h,Wind speed lag 72h,0.007378558723507192,mean_abs_shap,66
-target_aqi_48h,random_forest,relative_humidity_2m_lag_6h,Humidity lag 6h,0.007151911300341692,mean_abs_shap,67
-target_aqi_48h,random_forest,us_aqi_lag_6h,US AQI lag 6h,0.007016011874083896,mean_abs_shap,68
-target_aqi_48h,random_forest,wind_speed_10m_rolling_std_12h,Wind speed rolling std 12h,0.00684290255450596,mean_abs_shap,69
-target_aqi_48h,random_forest,wind_direction_10m_lag_6h,Wind direction lag 6h,0.006440116695578603,mean_abs_shap,70
-target_aqi_48h,random_forest,wind_speed_10m_lag_12h,Wind speed lag 12h,0.006296683848153386,mean_abs_shap,71
-target_aqi_48h,random_forest,pm10_lag_6h,PM10 lag 6h,0.006085761852569425,mean_abs_shap,72
-target_aqi_48h,random_forest,pm10_lag_48h,PM10 lag 48h,0.005955609635972039,mean_abs_shap,73
-target_aqi_48h,random_forest,sulphur_dioxide_lag_24h,SO2 lag 24h,0.005891563276598303,mean_abs_shap,74
-target_aqi_48h,random_forest,ozone_lag_12h,ozone lag 12h,0.0057307316180193225,mean_abs_shap,75
-target_aqi_48h,random_forest,nitrogen_dioxide_lag_72h,NO2 lag 72h,0.00556575915510405,mean_abs_shap,76
-target_aqi_48h,random_forest,temperature_2m_rolling_mean_6h,Temperature rolling mean 6h,0.005334816494476062,mean_abs_shap,77
-target_aqi_48h,random_forest,ozone_lag_6h,ozone lag 6h,0.00531887359413596,mean_abs_shap,78
-target_aqi_48h,random_forest,ozone_lag_72h,ozone lag 72h,0.005192401022132808,mean_abs_shap,79
-target_aqi_48h,random_forest,ozone,ozone,0.005109962969416429,mean_abs_shap,80
-target_aqi_48h,random_forest,pm2_5_rolling_mean_3h,PM2.5 rolling mean 3h,0.005033528743549234,mean_abs_shap,81
-target_aqi_48h,random_forest,ozone_lag_24h,ozone lag 24h,0.005027202193887479,mean_abs_shap,82
-target_aqi_48h,random_forest,pm2_5_rolling_mean_12h,PM2.5 rolling mean 12h,0.004930910706807682,mean_abs_shap,83
-target_aqi_48h,random_forest,temperature_2m_lag_12h,Temperature lag 12h,0.004908222109866249,mean_abs_shap,84
-target_aqi_48h,random_forest,sulphur_dioxide_lag_6h,SO2 lag 6h,0.004841316644876412,mean_abs_shap,85
-target_aqi_48h,random_forest,temperature_2m_lag_24h,Temperature lag 24h,0.004822411410013954,mean_abs_shap,86
-target_aqi_48h,random_forest,ozone_lag_1h,ozone lag 1h,0.004813939053467273,mean_abs_shap,87
-target_aqi_48h,random_forest,wind_direction_10m,Wind direction,0.00476746004278444,mean_abs_shap,88
-target_aqi_48h,random_forest,wind_speed_10m_rolling_mean_3h,Wind speed rolling mean 3h,0.004635356467371106,mean_abs_shap,89
-target_aqi_48h,random_forest,ozone_lag_3h,ozone lag 3h,0.004541445258339592,mean_abs_shap,90
-target_aqi_48h,random_forest,cloud_cover_lag_48h,Cloud cover lag 48h,0.004489408328301823,mean_abs_shap,91
-target_aqi_48h,random_forest,pm2_5_lag_24h,PM2.5 lag 24h,0.0044683745858938185,mean_abs_shap,92
-target_aqi_48h,random_forest,cloud_cover_lag_24h,Cloud cover lag 24h,0.004358188283438781,mean_abs_shap,93
-target_aqi_48h,random_forest,temperature_2m_rolling_mean_3h,Temperature rolling mean 3h,0.004351159627345364,mean_abs_shap,94
-target_aqi_48h,random_forest,wind_direction_10m_lag_24h,Wind direction lag 24h,0.004342426627873462,mean_abs_shap,95
-target_aqi_48h,random_forest,wind_speed_10m_lag_6h,Wind speed lag 6h,0.004268104904879735,mean_abs_shap,96
-target_aqi_48h,random_forest,pm10_rolling_mean_3h,PM10 rolling mean 3h,0.004078061472138243,mean_abs_shap,97
-target_aqi_48h,random_forest,wind_direction_10m_lag_1h,Wind direction lag 1h,0.004019515434865896,mean_abs_shap,98
-target_aqi_48h,random_forest,cloud_cover_lag_3h,Cloud cover lag 3h,0.003869513712374331,mean_abs_shap,99
-target_aqi_48h,random_forest,wind_speed_10m_lag_3h,Wind speed lag 3h,0.003824670532476997,mean_abs_shap,100
-target_aqi_48h,random_forest,pm10_rolling_mean_6h,PM10 rolling mean 6h,0.003764599753990488,mean_abs_shap,101
-target_aqi_48h,random_forest,cloud_cover_lag_12h,Cloud cover lag 12h,0.0036008972097055546,mean_abs_shap,102
-target_aqi_48h,random_forest,temperature_2m_lag_3h,Temperature lag 3h,0.0035722490020568603,mean_abs_shap,103
-target_aqi_48h,random_forest,pm2_5_lag_48h,PM2.5 lag 48h,0.0034582009100541902,mean_abs_shap,104
-target_aqi_48h,random_forest,relative_humidity_2m_lag_72h,Humidity lag 72h,0.003417442207409171,mean_abs_shap,105
-target_aqi_48h,random_forest,relative_humidity_2m_lag_12h,Humidity lag 12h,0.0033310702344754293,mean_abs_shap,106
-target_aqi_48h,random_forest,wind_speed_10m_lag_48h,Wind speed lag 48h,0.00330496403692223,mean_abs_shap,107
-target_aqi_48h,random_forest,pm2_5_rolling_mean_6h,PM2.5 rolling mean 6h,0.003300726156759427,mean_abs_shap,108
-target_aqi_48h,random_forest,pm10_lag_12h,PM10 lag 12h,0.003289543968548839,mean_abs_shap,109
-target_aqi_48h,random_forest,relative_humidity_2m,Humidity,0.0032711660938329217,mean_abs_shap,110
-target_aqi_48h,random_forest,wind_direction_10m_lag_3h,Wind direction lag 3h,0.0032634985912340293,mean_abs_shap,111
-target_aqi_48h,random_forest,temperature_2m,Temperature,0.0032274054759149616,mean_abs_shap,112
-target_aqi_48h,random_forest,wind_speed_10m_lag_24h,Wind speed lag 24h,0.0032038964064177236,mean_abs_shap,113
-target_aqi_48h,random_forest,pm2_5_lag_72h,PM2.5 lag 72h,0.003139147055388263,mean_abs_shap,114
-target_aqi_48h,random_forest,ozone_lag_48h,ozone lag 48h,0.0031327449212852896,mean_abs_shap,115
-target_aqi_48h,random_forest,temperature_2m_lag_6h,Temperature lag 6h,0.0031044245252039486,mean_abs_shap,116
-target_aqi_48h,random_forest,pm10_lag_72h,PM10 lag 72h,0.003099592447562184,mean_abs_shap,117
-target_aqi_48h,random_forest,hour,hour,0.0030594184775443495,mean_abs_shap,118
-target_aqi_48h,random_forest,sulphur_dioxide_lag_48h,SO2 lag 48h,0.0030488992105718025,mean_abs_shap,119
-target_aqi_48h,random_forest,sulphur_dioxide_lag_12h,SO2 lag 12h,0.003016962660375441,mean_abs_shap,120
-target_aqi_48h,random_forest,relative_humidity_2m_lag_1h,Humidity lag 1h,0.002946292881378676,mean_abs_shap,121
-target_aqi_48h,random_forest,temperature_2m_lag_1h,Temperature lag 1h,0.002861393462006783,mean_abs_shap,122
-target_aqi_48h,random_forest,wind_direction_10m_lag_48h,Wind direction lag 48h,0.002761094026999348,mean_abs_shap,123
-target_aqi_48h,random_forest,pm2_5_lag_3h,PM2.5 lag 3h,0.0026953803318751335,mean_abs_shap,124
-target_aqi_48h,random_forest,pm10,PM10,0.002636749943209401,mean_abs_shap,125
-target_aqi_48h,random_forest,temperature_2m_lag_48h,Temperature lag 48h,0.0026038093630268246,mean_abs_shap,126
-target_aqi_48h,random_forest,carbon_monoxide_lag_12h,CO lag 12h,0.0025825093114627408,mean_abs_shap,127
-target_aqi_48h,random_forest,wind_speed_10m,Wind speed,0.002566565440051293,mean_abs_shap,128
-target_aqi_48h,random_forest,nitrogen_dioxide_lag_3h,NO2 lag 3h,0.0025242160521947187,mean_abs_shap,129
-target_aqi_48h,random_forest,wind_direction_10m_lag_72h,Wind direction lag 72h,0.002500401263848101,mean_abs_shap,130
-target_aqi_48h,random_forest,pm10_lag_3h,PM10 lag 3h,0.0024967221545431593,mean_abs_shap,131
-target_aqi_48h,random_forest,cloud_cover_lag_72h,Cloud cover lag 72h,0.0024390240418281526,mean_abs_shap,132
-target_aqi_48h,random_forest,temperature_2m_lag_72h,Temperature lag 72h,0.002436513328840629,mean_abs_shap,133
-target_aqi_48h,random_forest,pm10_lag_24h,PM10 lag 24h,0.0023373668080794085,mean_abs_shap,134
-target_aqi_48h,random_forest,carbon_monoxide_lag_6h,CO lag 6h,0.0023061928582340644,mean_abs_shap,135
-target_aqi_48h,random_forest,pm2_5_lag_1h,PM2.5 lag 1h,0.002106279932573482,mean_abs_shap,136
-target_aqi_48h,random_forest,cloud_cover_lag_6h,Cloud cover lag 6h,0.002081768453141196,mean_abs_shap,137
-target_aqi_48h,random_forest,relative_humidity_2m_lag_3h,Humidity lag 3h,0.002045388994873371,mean_abs_shap,138
-target_aqi_48h,random_forest,relative_humidity_2m_lag_48h,Humidity lag 48h,0.002038952136871056,mean_abs_shap,139
-target_aqi_48h,random_forest,pm10_rolling_std_6h,PM10 rolling std 6h,0.0020186433550417357,mean_abs_shap,140
-target_aqi_48h,random_forest,carbon_monoxide_lag_24h,CO lag 24h,0.001999476967872982,mean_abs_shap,141
-target_aqi_48h,random_forest,pm2_5,PM2.5,0.001962355752165023,mean_abs_shap,142
-target_aqi_48h,random_forest,cloud_cover,Cloud cover,0.0019516706403724224,mean_abs_shap,143
-target_aqi_48h,random_forest,nitrogen_dioxide,NO2,0.001920517256451303,mean_abs_shap,144
-target_aqi_48h,random_forest,carbon_monoxide_lag_1h,CO lag 1h,0.0018499922839634567,mean_abs_shap,145
-target_aqi_48h,random_forest,nitrogen_dioxide_lag_12h,NO2 lag 12h,0.0018481825088391903,mean_abs_shap,146
-target_aqi_48h,random_forest,pm2_5_lag_12h,PM2.5 lag 12h,0.0018441659969303174,mean_abs_shap,147
-target_aqi_48h,random_forest,wind_speed_10m_lag_1h,Wind speed lag 1h,0.0018421099738025776,mean_abs_shap,148
-target_aqi_48h,random_forest,carbon_monoxide_lag_72h,CO lag 72h,0.0018161451936924105,mean_abs_shap,149
-target_aqi_48h,random_forest,temperature_2m_rolling_std_12h,Temperature rolling std 12h,0.0017528062570590665,mean_abs_shap,150
-target_aqi_48h,random_forest,us_aqi_rolling_std_6h,US AQI rolling std 6h,0.0017491880616793843,mean_abs_shap,151
-target_aqi_48h,random_forest,carbon_monoxide,CO,0.0017237901622599954,mean_abs_shap,152
-target_aqi_48h,random_forest,wind_speed_10m_rolling_std_6h,Wind speed rolling std 6h,0.0017097220502122106,mean_abs_shap,153
-target_aqi_48h,random_forest,carbon_monoxide_lag_48h,CO lag 48h,0.001685734062271377,mean_abs_shap,154
-target_aqi_48h,random_forest,nitrogen_dioxide_lag_48h,NO2 lag 48h,0.0016143592377120036,mean_abs_shap,155
-target_aqi_48h,random_forest,pm10_lag_1h,PM10 lag 1h,0.0015848043090772384,mean_abs_shap,156
-target_aqi_48h,random_forest,pm10_rolling_std_3h,PM10 rolling std 3h,0.0015261657712649435,mean_abs_shap,157
-target_aqi_48h,random_forest,nitrogen_dioxide_lag_24h,NO2 lag 24h,0.001524043981437322,mean_abs_shap,158
-target_aqi_48h,random_forest,cloud_cover_lag_1h,Cloud cover lag 1h,0.0015225201243163394,mean_abs_shap,159
-target_aqi_48h,random_forest,nitrogen_dioxide_lag_1h,NO2 lag 1h,0.0014926749517268393,mean_abs_shap,160
-target_aqi_48h,random_forest,relative_humidity_2m_lag_24h,Humidity lag 24h,0.001453854769037301,mean_abs_shap,161
-target_aqi_48h,random_forest,pm2_5_rolling_std_3h,PM2.5 rolling std 3h,0.0013966284298406386,mean_abs_shap,162
-target_aqi_48h,random_forest,pm2_5_lag_6h,PM2.5 lag 6h,0.0013662154484866903,mean_abs_shap,163
-target_aqi_48h,random_forest,nitrogen_dioxide_lag_6h,NO2 lag 6h,0.0012883515249691058,mean_abs_shap,164
-target_aqi_48h,random_forest,pm10_change_1h,PM10 change 1h,0.0010741538890317967,mean_abs_shap,165
-target_aqi_48h,random_forest,wind_speed_10m_rolling_std_3h,Wind speed rolling std 3h,0.0010710118821240803,mean_abs_shap,166
-target_aqi_48h,random_forest,temperature_2m_rolling_std_6h,Temperature rolling std 6h,0.0010676557575632956,mean_abs_shap,167
-target_aqi_48h,random_forest,pm2_5_rolling_std_6h,PM2.5 rolling std 6h,0.0010614238302813722,mean_abs_shap,168
-target_aqi_48h,random_forest,carbon_monoxide_lag_3h,CO lag 3h,0.0010275411510668453,mean_abs_shap,169
-target_aqi_48h,random_forest,pm2_5_change_1h,PM2.5 change 1h,0.0008350621642475763,mean_abs_shap,170
-target_aqi_48h,random_forest,temperature_2m_rolling_std_3h,Temperature rolling std 3h,0.0007237006996322191,mean_abs_shap,171
-target_aqi_48h,random_forest,us_aqi_rolling_std_3h,US AQI rolling std 3h,0.0006074128293330578,mean_abs_shap,172
-target_aqi_48h,random_forest,precipitation_lag_72h,precipitation lag 72h,0.00038319739033609656,mean_abs_shap,173
-target_aqi_48h,random_forest,precipitation_lag_24h,precipitation lag 24h,0.0002834168273061288,mean_abs_shap,174
-target_aqi_48h,random_forest,precipitation,precipitation,0.0002609878478995008,mean_abs_shap,175
-target_aqi_48h,random_forest,precipitation_lag_6h,precipitation lag 6h,0.00022020608212969833,mean_abs_shap,176
-target_aqi_48h,random_forest,precipitation_lag_48h,precipitation lag 48h,0.00019349310097302265,mean_abs_shap,177
-target_aqi_48h,random_forest,precipitation_lag_1h,precipitation lag 1h,0.00017419858137989806,mean_abs_shap,178
-target_aqi_48h,random_forest,precipitation_lag_12h,precipitation lag 12h,0.0001474093541393998,mean_abs_shap,179
-target_aqi_48h,random_forest,aqi_change_1h,AQI change 1h,0.0001293530096904596,mean_abs_shap,180
-target_aqi_48h,random_forest,precipitation_lag_3h,precipitation lag 3h,0.00012271401991741305,mean_abs_shap,181
-target_aqi_48h,random_forest,latitude,latitude,0.0,mean_abs_shap,182
-target_aqi_48h,random_forest,longitude,longitude,0.0,mean_abs_shap,183
-target_aqi_72h,random_forest,day_of_month,Day of month,3.0276148494296606,mean_abs_shap,1
-target_aqi_72h,random_forest,wind_speed_10m_rolling_mean_72h,Wind speed rolling mean 72h,1.9992673168175426,mean_abs_shap,2
-target_aqi_72h,random_forest,us_aqi_rolling_mean_48h,US AQI rolling mean 48h,1.246152487860161,mean_abs_shap,3
-target_aqi_72h,random_forest,pressure_msl_lag_24h,Pressure lag 24h,0.9412597352158906,mean_abs_shap,4
-target_aqi_72h,random_forest,temperature_2m_rolling_mean_72h,Temperature rolling mean 72h,0.6397805466905148,mean_abs_shap,5
-target_aqi_72h,random_forest,pm10_rolling_std_24h,PM10 rolling std 24h,0.4032144898625837,mean_abs_shap,6
-target_aqi_72h,random_forest,temperature_2m_rolling_std_72h,Temperature rolling std 72h,0.3897853804543341,mean_abs_shap,7
-target_aqi_72h,random_forest,temperature_2m_rolling_mean_48h,Temperature rolling mean 48h,0.36933707637467467,mean_abs_shap,8
-target_aqi_72h,random_forest,pressure_msl_lag_12h,Pressure lag 12h,0.36900696074260286,mean_abs_shap,9
-target_aqi_72h,random_forest,pressure_msl_lag_6h,Pressure lag 6h,0.3504299705034625,mean_abs_shap,10
-target_aqi_72h,random_forest,pm2_5_rolling_std_72h,PM2.5 rolling std 72h,0.2778943897458874,mean_abs_shap,11
-target_aqi_72h,random_forest,pm2_5_rolling_mean_48h,PM2.5 rolling mean 48h,0.2751775113378745,mean_abs_shap,12
-target_aqi_72h,random_forest,temperature_2m_rolling_std_48h,Temperature rolling std 48h,0.2191786129698906,mean_abs_shap,13
-target_aqi_72h,random_forest,pm10_rolling_std_72h,PM10 rolling std 72h,0.17974955877779197,mean_abs_shap,14
-target_aqi_72h,random_forest,pm10_rolling_mean_24h,PM10 rolling mean 24h,0.17384503883930308,mean_abs_shap,15
-target_aqi_72h,random_forest,wind_speed_10m_rolling_mean_24h,Wind speed rolling mean 24h,0.14302695391927162,mean_abs_shap,16
-target_aqi_72h,random_forest,temperature_2m_rolling_mean_24h,Temperature rolling mean 24h,0.1388810173880036,mean_abs_shap,17
-target_aqi_72h,random_forest,pm10_rolling_mean_48h,PM10 rolling mean 48h,0.13290988663031575,mean_abs_shap,18
-target_aqi_72h,random_forest,us_aqi_lag_48h,US AQI lag 48h,0.13068445535110623,mean_abs_shap,19
-target_aqi_72h,random_forest,pm2_5_rolling_mean_72h,PM2.5 rolling mean 72h,0.10967402521814357,mean_abs_shap,20
-target_aqi_72h,random_forest,wind_speed_10m_rolling_std_72h,Wind speed rolling std 72h,0.10847517959738676,mean_abs_shap,21
-target_aqi_72h,random_forest,aqi_change_24h,AQI change 24h,0.09174171167298564,mean_abs_shap,22
-target_aqi_72h,random_forest,pm2_5_rolling_std_48h,PM2.5 rolling std 48h,0.08731571158957648,mean_abs_shap,23
-target_aqi_72h,random_forest,pm10_rolling_std_48h,PM10 rolling std 48h,0.0803054995688803,mean_abs_shap,24
-target_aqi_72h,random_forest,pm10_rolling_mean_72h,PM10 rolling mean 72h,0.06430736102789111,mean_abs_shap,25
-target_aqi_72h,random_forest,wind_speed_10m_rolling_mean_48h,Wind speed rolling mean 48h,0.06393188087484168,mean_abs_shap,26
-target_aqi_72h,random_forest,month,month,0.060041864073597635,mean_abs_shap,27
-target_aqi_72h,random_forest,us_aqi_rolling_mean_72h,US AQI rolling mean 72h,0.058812684819030396,mean_abs_shap,28
-target_aqi_72h,random_forest,us_aqi_lag_72h,US AQI lag 72h,0.0579985900281474,mean_abs_shap,29
-target_aqi_72h,random_forest,pressure_msl,Pressure,0.05460034921863914,mean_abs_shap,30
-target_aqi_72h,random_forest,us_aqi_rolling_mean_24h,US AQI rolling mean 24h,0.053858064791758774,mean_abs_shap,31
-target_aqi_72h,random_forest,pm10_rolling_mean_12h,PM10 rolling mean 12h,0.05013155083169036,mean_abs_shap,32
-target_aqi_72h,random_forest,us_aqi_rolling_std_24h,US AQI rolling std 24h,0.048824473024048964,mean_abs_shap,33
-target_aqi_72h,random_forest,wind_speed_10m_rolling_std_48h,Wind speed rolling std 48h,0.04365040260600445,mean_abs_shap,34
-target_aqi_72h,random_forest,us_aqi_rolling_std_48h,US AQI rolling std 48h,0.03585908570403867,mean_abs_shap,35
-target_aqi_72h,random_forest,wind_speed_10m_rolling_std_24h,Wind speed rolling std 24h,0.035486700653364706,mean_abs_shap,36
-target_aqi_72h,random_forest,us_aqi_rolling_mean_12h,US AQI rolling mean 12h,0.034374249256542096,mean_abs_shap,37
-target_aqi_72h,random_forest,us_aqi_lag_24h,US AQI lag 24h,0.030473888562091087,mean_abs_shap,38
-target_aqi_72h,random_forest,pressure_msl_lag_72h,Pressure lag 72h,0.029007496037483524,mean_abs_shap,39
-target_aqi_72h,random_forest,pressure_msl_lag_3h,Pressure lag 3h,0.028342248412469778,mean_abs_shap,40
-target_aqi_72h,random_forest,us_aqi_rolling_std_72h,US AQI rolling std 72h,0.02826332239114492,mean_abs_shap,41
-target_aqi_72h,random_forest,pm2_5_rolling_mean_24h,PM2.5 rolling mean 24h,0.02802732471918459,mean_abs_shap,42
-target_aqi_72h,random_forest,day_of_week,Day of week,0.025621392234483863,mean_abs_shap,43
-target_aqi_72h,random_forest,us_aqi_rolling_mean_6h,US AQI rolling mean 6h,0.025237544793993833,mean_abs_shap,44
-target_aqi_72h,random_forest,us_aqi_lag_12h,US AQI lag 12h,0.023910047578821512,mean_abs_shap,45
-target_aqi_72h,random_forest,wind_speed_10m_rolling_mean_12h,Wind speed rolling mean 12h,0.019869053364888627,mean_abs_shap,46
-target_aqi_72h,random_forest,temperature_2m_rolling_std_24h,Temperature rolling std 24h,0.0166062644557747,mean_abs_shap,47
-target_aqi_72h,random_forest,pm10_rolling_std_12h,PM10 rolling std 12h,0.016322964662308093,mean_abs_shap,48
-target_aqi_72h,random_forest,pressure_msl_lag_48h,Pressure lag 48h,0.015946283446946534,mean_abs_shap,49
-target_aqi_72h,random_forest,us_aqi_rolling_mean_3h,US AQI rolling mean 3h,0.014775688482824264,mean_abs_shap,50
-target_aqi_72h,random_forest,pm2_5_rolling_mean_12h,PM2.5 rolling mean 12h,0.014452672531359127,mean_abs_shap,51
-target_aqi_72h,random_forest,pressure_msl_lag_1h,Pressure lag 1h,0.014327724907127356,mean_abs_shap,52
-target_aqi_72h,random_forest,pm2_5_rolling_std_24h,PM2.5 rolling std 24h,0.013968414940161619,mean_abs_shap,53
-target_aqi_72h,random_forest,wind_speed_10m_lag_48h,Wind speed lag 48h,0.013455103197435422,mean_abs_shap,54
-target_aqi_72h,random_forest,wind_speed_10m_rolling_mean_6h,Wind speed rolling mean 6h,0.011720596791912199,mean_abs_shap,55
-target_aqi_72h,random_forest,sulphur_dioxide_lag_6h,SO2 lag 6h,0.011292401096052267,mean_abs_shap,56
-target_aqi_72h,random_forest,pm10_lag_72h,PM10 lag 72h,0.010995835857504943,mean_abs_shap,57
-target_aqi_72h,random_forest,wind_direction_10m_lag_6h,Wind direction lag 6h,0.010838216851359422,mean_abs_shap,58
-target_aqi_72h,random_forest,ozone_lag_12h,ozone lag 12h,0.009869109272443692,mean_abs_shap,59
-target_aqi_72h,random_forest,wind_speed_10m_lag_1h,Wind speed lag 1h,0.009492937456934303,mean_abs_shap,60
-target_aqi_72h,random_forest,ozone,ozone,0.00891100421648243,mean_abs_shap,61
-target_aqi_72h,random_forest,temperature_2m_rolling_mean_6h,Temperature rolling mean 6h,0.008059235318678344,mean_abs_shap,62
-target_aqi_72h,random_forest,ozone_lag_1h,ozone lag 1h,0.007737834729063233,mean_abs_shap,63
-target_aqi_72h,random_forest,wind_speed_10m_lag_24h,Wind speed lag 24h,0.007693931618682047,mean_abs_shap,64
-target_aqi_72h,random_forest,sulphur_dioxide_lag_1h,SO2 lag 1h,0.007625677607023185,mean_abs_shap,65
-target_aqi_72h,random_forest,sulphur_dioxide,SO2,0.0074872132025282,mean_abs_shap,66
-target_aqi_72h,random_forest,us_aqi_lag_3h,US AQI lag 3h,0.0074669350256937606,mean_abs_shap,67
-target_aqi_72h,random_forest,wind_speed_10m,Wind speed,0.007044022292166413,mean_abs_shap,68
-target_aqi_72h,random_forest,pm10_lag_24h,PM10 lag 24h,0.006603164527164919,mean_abs_shap,69
-target_aqi_72h,random_forest,us_aqi_rolling_std_12h,US AQI rolling std 12h,0.0061152079113738714,mean_abs_shap,70
-target_aqi_72h,random_forest,temperature_2m_rolling_mean_3h,Temperature rolling mean 3h,0.006087707629707817,mean_abs_shap,71
-target_aqi_72h,random_forest,wind_speed_10m_lag_12h,Wind speed lag 12h,0.005803250285190775,mean_abs_shap,72
-target_aqi_72h,random_forest,wind_speed_10m_rolling_mean_3h,Wind speed rolling mean 3h,0.005690137369589065,mean_abs_shap,73
-target_aqi_72h,random_forest,us_aqi,US AQI,0.0055545902535813945,mean_abs_shap,74
-target_aqi_72h,random_forest,sulphur_dioxide_lag_72h,SO2 lag 72h,0.00551608135802699,mean_abs_shap,75
-target_aqi_72h,random_forest,relative_humidity_2m_lag_12h,Humidity lag 12h,0.005479612337746085,mean_abs_shap,76
-target_aqi_72h,random_forest,wind_speed_10m_lag_72h,Wind speed lag 72h,0.00537116524758487,mean_abs_shap,77
-target_aqi_72h,random_forest,pm2_5_rolling_mean_6h,PM2.5 rolling mean 6h,0.005308428220960027,mean_abs_shap,78
-target_aqi_72h,random_forest,cloud_cover_lag_6h,Cloud cover lag 6h,0.005119116365016414,mean_abs_shap,79
-target_aqi_72h,random_forest,pm2_5_lag_12h,PM2.5 lag 12h,0.004975182815677172,mean_abs_shap,80
-target_aqi_72h,random_forest,sulphur_dioxide_lag_48h,SO2 lag 48h,0.004905068783542513,mean_abs_shap,81
-target_aqi_72h,random_forest,ozone_lag_3h,ozone lag 3h,0.004854018399806658,mean_abs_shap,82
-target_aqi_72h,random_forest,us_aqi_lag_6h,US AQI lag 6h,0.004659094115863144,mean_abs_shap,83
-target_aqi_72h,random_forest,ozone_lag_6h,ozone lag 6h,0.004503837737570607,mean_abs_shap,84
-target_aqi_72h,random_forest,sulphur_dioxide_lag_3h,SO2 lag 3h,0.00445031729219147,mean_abs_shap,85
-target_aqi_72h,random_forest,pm2_5_rolling_mean_3h,PM2.5 rolling mean 3h,0.0044220402959247165,mean_abs_shap,86
-target_aqi_72h,random_forest,wind_direction_10m_lag_1h,Wind direction lag 1h,0.0044072698021847545,mean_abs_shap,87
-target_aqi_72h,random_forest,temperature_2m_rolling_mean_12h,Temperature rolling mean 12h,0.0042945319682255725,mean_abs_shap,88
-target_aqi_72h,random_forest,pm10_lag_12h,PM10 lag 12h,0.0041969184025883784,mean_abs_shap,89
-target_aqi_72h,random_forest,ozone_lag_72h,ozone lag 72h,0.004137144328686215,mean_abs_shap,90
-target_aqi_72h,random_forest,temperature_2m_lag_6h,Temperature lag 6h,0.004084533601825185,mean_abs_shap,91
-target_aqi_72h,random_forest,us_aqi_lag_1h,US AQI lag 1h,0.003937149081363201,mean_abs_shap,92
-target_aqi_72h,random_forest,temperature_2m_lag_12h,Temperature lag 12h,0.00381980598379476,mean_abs_shap,93
-target_aqi_72h,random_forest,wind_speed_10m_lag_6h,Wind speed lag 6h,0.0037531099892593287,mean_abs_shap,94
-target_aqi_72h,random_forest,temperature_2m_lag_3h,Temperature lag 3h,0.0036812862833444566,mean_abs_shap,95
-target_aqi_72h,random_forest,cloud_cover_lag_12h,Cloud cover lag 12h,0.003646248493054159,mean_abs_shap,96
-target_aqi_72h,random_forest,wind_direction_10m_lag_12h,Wind direction lag 12h,0.0036444111623239288,mean_abs_shap,97
-target_aqi_72h,random_forest,nitrogen_dioxide_lag_6h,NO2 lag 6h,0.0035197151336373196,mean_abs_shap,98
-target_aqi_72h,random_forest,wind_speed_10m_rolling_std_12h,Wind speed rolling std 12h,0.003485160183289728,mean_abs_shap,99
-target_aqi_72h,random_forest,pm2_5_lag_72h,PM2.5 lag 72h,0.0034706012500105433,mean_abs_shap,100
-target_aqi_72h,random_forest,cloud_cover_lag_24h,Cloud cover lag 24h,0.0034017103297652755,mean_abs_shap,101
-target_aqi_72h,random_forest,temperature_2m_rolling_std_12h,Temperature rolling std 12h,0.003307574375862307,mean_abs_shap,102
-target_aqi_72h,random_forest,pm2_5_lag_6h,PM2.5 lag 6h,0.003294195868582271,mean_abs_shap,103
-target_aqi_72h,random_forest,wind_direction_10m,Wind direction,0.0032920197992519417,mean_abs_shap,104
-target_aqi_72h,random_forest,temperature_2m_rolling_std_6h,Temperature rolling std 6h,0.0032537665376304974,mean_abs_shap,105
-target_aqi_72h,random_forest,wind_direction_10m_lag_48h,Wind direction lag 48h,0.003230808798518444,mean_abs_shap,106
-target_aqi_72h,random_forest,sulphur_dioxide_lag_24h,SO2 lag 24h,0.0030523254360143534,mean_abs_shap,107
-target_aqi_72h,random_forest,wind_direction_10m_lag_72h,Wind direction lag 72h,0.0030235494816153114,mean_abs_shap,108
-target_aqi_72h,random_forest,sulphur_dioxide_lag_12h,SO2 lag 12h,0.0030210921066350224,mean_abs_shap,109
-target_aqi_72h,random_forest,ozone_lag_48h,ozone lag 48h,0.003018811607913558,mean_abs_shap,110
-target_aqi_72h,random_forest,pm2_5_lag_3h,PM2.5 lag 3h,0.0029673727076068943,mean_abs_shap,111
-target_aqi_72h,random_forest,relative_humidity_2m_lag_3h,Humidity lag 3h,0.002959246293465483,mean_abs_shap,112
-target_aqi_72h,random_forest,wind_direction_10m_lag_3h,Wind direction lag 3h,0.002953599623336169,mean_abs_shap,113
-target_aqi_72h,random_forest,pm10_rolling_mean_3h,PM10 rolling mean 3h,0.0028986950448873284,mean_abs_shap,114
-target_aqi_72h,random_forest,wind_speed_10m_lag_3h,Wind speed lag 3h,0.0028803697938100553,mean_abs_shap,115
-target_aqi_72h,random_forest,pm2_5_lag_24h,PM2.5 lag 24h,0.0028556205451145305,mean_abs_shap,116
-target_aqi_72h,random_forest,pm2_5,PM2.5,0.00283584890753643,mean_abs_shap,117
-target_aqi_72h,random_forest,temperature_2m_lag_1h,Temperature lag 1h,0.0028073681990051515,mean_abs_shap,118
-target_aqi_72h,random_forest,pm10_lag_6h,PM10 lag 6h,0.0027637793548519283,mean_abs_shap,119
-target_aqi_72h,random_forest,nitrogen_dioxide_lag_12h,NO2 lag 12h,0.002757084981731055,mean_abs_shap,120
-target_aqi_72h,random_forest,wind_direction_10m_lag_24h,Wind direction lag 24h,0.002755108557846324,mean_abs_shap,121
-target_aqi_72h,random_forest,ozone_lag_24h,ozone lag 24h,0.002748161248624385,mean_abs_shap,122
-target_aqi_72h,random_forest,pm10_lag_3h,PM10 lag 3h,0.0027446671741529786,mean_abs_shap,123
-target_aqi_72h,random_forest,pm2_5_rolling_std_12h,PM2.5 rolling std 12h,0.0027319966016784722,mean_abs_shap,124
-target_aqi_72h,random_forest,carbon_monoxide,CO,0.0026638955626861263,mean_abs_shap,125
-target_aqi_72h,random_forest,carbon_monoxide_lag_12h,CO lag 12h,0.0024924941151723452,mean_abs_shap,126
-target_aqi_72h,random_forest,pm10_lag_48h,PM10 lag 48h,0.0024140053388619826,mean_abs_shap,127
-target_aqi_72h,random_forest,pm2_5_lag_48h,PM2.5 lag 48h,0.002393082844431785,mean_abs_shap,128
-target_aqi_72h,random_forest,nitrogen_dioxide_lag_72h,NO2 lag 72h,0.0023718486163687765,mean_abs_shap,129
-target_aqi_72h,random_forest,nitrogen_dioxide_lag_1h,NO2 lag 1h,0.0023546967272051527,mean_abs_shap,130
-target_aqi_72h,random_forest,carbon_monoxide_lag_3h,CO lag 3h,0.0023362162982055244,mean_abs_shap,131
-target_aqi_72h,random_forest,nitrogen_dioxide,NO2,0.00233016041584015,mean_abs_shap,132
-target_aqi_72h,random_forest,cloud_cover,Cloud cover,0.0023096472396867906,mean_abs_shap,133
-target_aqi_72h,random_forest,temperature_2m,Temperature,0.002243119711848526,mean_abs_shap,134
-target_aqi_72h,random_forest,wind_speed_10m_rolling_std_6h,Wind speed rolling std 6h,0.0022265830962258887,mean_abs_shap,135
-target_aqi_72h,random_forest,pm10_rolling_mean_6h,PM10 rolling mean 6h,0.0021489346597915234,mean_abs_shap,136
-target_aqi_72h,random_forest,pm10_lag_1h,PM10 lag 1h,0.0021412596393732336,mean_abs_shap,137
-target_aqi_72h,random_forest,nitrogen_dioxide_lag_3h,NO2 lag 3h,0.0021353435248341554,mean_abs_shap,138
-target_aqi_72h,random_forest,cloud_cover_lag_3h,Cloud cover lag 3h,0.0021244151360704346,mean_abs_shap,139
-target_aqi_72h,random_forest,pm10_rolling_std_3h,PM10 rolling std 3h,0.0021197924294621287,mean_abs_shap,140
-target_aqi_72h,random_forest,cloud_cover_lag_48h,Cloud cover lag 48h,0.0020939562020806306,mean_abs_shap,141
-target_aqi_72h,random_forest,carbon_monoxide_lag_24h,CO lag 24h,0.0020541706538052336,mean_abs_shap,142
-target_aqi_72h,random_forest,pm10,PM10,0.001984324799538133,mean_abs_shap,143
-target_aqi_72h,random_forest,nitrogen_dioxide_lag_48h,NO2 lag 48h,0.0018992796933581255,mean_abs_shap,144
-target_aqi_72h,random_forest,carbon_monoxide_lag_1h,CO lag 1h,0.0018865794295195985,mean_abs_shap,145
-target_aqi_72h,random_forest,pm2_5_lag_1h,PM2.5 lag 1h,0.00185393678678148,mean_abs_shap,146
-target_aqi_72h,random_forest,relative_humidity_2m_lag_6h,Humidity lag 6h,0.001829116122492328,mean_abs_shap,147
-target_aqi_72h,random_forest,hour,hour,0.0018111213423866012,mean_abs_shap,148
-target_aqi_72h,random_forest,pm10_rolling_std_6h,PM10 rolling std 6h,0.0017347898361779928,mean_abs_shap,149
-target_aqi_72h,random_forest,relative_humidity_2m_lag_24h,Humidity lag 24h,0.0017207939339579888,mean_abs_shap,150
-target_aqi_72h,random_forest,relative_humidity_2m_lag_1h,Humidity lag 1h,0.001700932475672578,mean_abs_shap,151
-target_aqi_72h,random_forest,relative_humidity_2m_lag_48h,Humidity lag 48h,0.0016824762288641932,mean_abs_shap,152
-target_aqi_72h,random_forest,temperature_2m_lag_72h,Temperature lag 72h,0.0016565926114906423,mean_abs_shap,153
-target_aqi_72h,random_forest,cloud_cover_lag_72h,Cloud cover lag 72h,0.0016100364930481414,mean_abs_shap,154
-target_aqi_72h,random_forest,pm2_5_change_1h,PM2.5 change 1h,0.001502325468677364,mean_abs_shap,155
-target_aqi_72h,random_forest,precipitation_lag_3h,precipitation lag 3h,0.0014896076095406048,mean_abs_shap,156
-target_aqi_72h,random_forest,us_aqi_rolling_std_6h,US AQI rolling std 6h,0.001456650339233362,mean_abs_shap,157
-target_aqi_72h,random_forest,pm2_5_rolling_std_6h,PM2.5 rolling std 6h,0.0014145779782351983,mean_abs_shap,158
-target_aqi_72h,random_forest,temperature_2m_lag_24h,Temperature lag 24h,0.0013812430813981457,mean_abs_shap,159
-target_aqi_72h,random_forest,temperature_2m_lag_48h,Temperature lag 48h,0.0013524007084671924,mean_abs_shap,160
-target_aqi_72h,random_forest,cloud_cover_lag_1h,Cloud cover lag 1h,0.0013431385020666103,mean_abs_shap,161
-target_aqi_72h,random_forest,relative_humidity_2m_lag_72h,Humidity lag 72h,0.0012589563266612123,mean_abs_shap,162
-target_aqi_72h,random_forest,nitrogen_dioxide_lag_24h,NO2 lag 24h,0.0012117019584244964,mean_abs_shap,163
-target_aqi_72h,random_forest,carbon_monoxide_lag_6h,CO lag 6h,0.0011579729565945247,mean_abs_shap,164
-target_aqi_72h,random_forest,carbon_monoxide_lag_48h,CO lag 48h,0.0010783301227346312,mean_abs_shap,165
-target_aqi_72h,random_forest,carbon_monoxide_lag_72h,CO lag 72h,0.0010690992687086836,mean_abs_shap,166
-target_aqi_72h,random_forest,pm10_change_1h,PM10 change 1h,0.00102134566381701,mean_abs_shap,167
-target_aqi_72h,random_forest,relative_humidity_2m,Humidity,0.0010079659489772414,mean_abs_shap,168
-target_aqi_72h,random_forest,pm2_5_rolling_std_3h,PM2.5 rolling std 3h,0.0009382039071896467,mean_abs_shap,169
-target_aqi_72h,random_forest,temperature_2m_rolling_std_3h,Temperature rolling std 3h,0.0006915694077147364,mean_abs_shap,170
-target_aqi_72h,random_forest,wind_speed_10m_rolling_std_3h,Wind speed rolling std 3h,0.000675509862939725,mean_abs_shap,171
-target_aqi_72h,random_forest,precipitation_lag_24h,precipitation lag 24h,0.0005092000586494587,mean_abs_shap,172
-target_aqi_72h,random_forest,is_weekend,is weekend,0.0004661256465873562,mean_abs_shap,173
-target_aqi_72h,random_forest,precipitation_lag_6h,precipitation lag 6h,0.0004367305764963919,mean_abs_shap,174
-target_aqi_72h,random_forest,us_aqi_rolling_std_3h,US AQI rolling std 3h,0.0003281583119984657,mean_abs_shap,175
-target_aqi_72h,random_forest,precipitation_lag_1h,precipitation lag 1h,0.0003277655559050215,mean_abs_shap,176
-target_aqi_72h,random_forest,precipitation_lag_48h,precipitation lag 48h,0.00032103737300878286,mean_abs_shap,177
-target_aqi_72h,random_forest,aqi_change_1h,AQI change 1h,0.00028262472336962986,mean_abs_shap,178
-target_aqi_72h,random_forest,precipitation_lag_72h,precipitation lag 72h,0.00010468860780210873,mean_abs_shap,179
-target_aqi_72h,random_forest,precipitation_lag_12h,precipitation lag 12h,9.358025484047086e-05,mean_abs_shap,180
-target_aqi_72h,random_forest,precipitation,precipitation,7.24157783436589e-05,mean_abs_shap,181
+target_aqi_72h,random_forest,day_of_month,Day of month,3.399233815030491,mean_abs_shap,1
+target_aqi_72h,random_forest,wind_speed_10m_rolling_mean_72h,Wind speed rolling mean 72h,1.854440438737793,mean_abs_shap,2
+target_aqi_72h,random_forest,us_aqi_rolling_mean_48h,US AQI rolling mean 48h,1.3553605697595896,mean_abs_shap,3
+target_aqi_72h,random_forest,temperature_2m_rolling_mean_48h,Temperature rolling mean 48h,0.6298204308450496,mean_abs_shap,4
+target_aqi_72h,random_forest,temperature_2m_rolling_std_72h,Temperature rolling std 72h,0.4744510666949903,mean_abs_shap,5
+target_aqi_72h,random_forest,temperature_2m_rolling_mean_72h,Temperature rolling mean 72h,0.2980271897988188,mean_abs_shap,6
+target_aqi_72h,random_forest,temperature_2m_rolling_std_48h,Temperature rolling std 48h,0.2926358798518463,mean_abs_shap,7
+target_aqi_72h,random_forest,pm10_rolling_std_24h,PM10 rolling std 24h,0.2857576859139485,mean_abs_shap,8
+target_aqi_72h,random_forest,pm2_5_rolling_std_72h,PM2.5 rolling std 72h,0.2800924256485019,mean_abs_shap,9
+target_aqi_72h,random_forest,pm10_rolling_mean_24h,PM10 rolling mean 24h,0.23951197205139999,mean_abs_shap,10
+target_aqi_72h,random_forest,pressure_msl,Pressure,0.23651849714298429,mean_abs_shap,11
+target_aqi_72h,random_forest,pressure_msl_lag_6h,Pressure lag 6h,0.20939325141354817,mean_abs_shap,12
+target_aqi_72h,random_forest,pressure_msl_lag_24h,Pressure lag 24h,0.19911347290446949,mean_abs_shap,13
+target_aqi_72h,random_forest,temperature_2m_rolling_mean_24h,Temperature rolling mean 24h,0.1991080565978387,mean_abs_shap,14
+target_aqi_72h,random_forest,pm2_5_rolling_mean_48h,PM2.5 rolling mean 48h,0.19165330073158363,mean_abs_shap,15
+target_aqi_72h,random_forest,wind_speed_10m_rolling_mean_12h,Wind speed rolling mean 12h,0.16743979074813195,mean_abs_shap,16
+target_aqi_72h,random_forest,pressure_msl_lag_3h,Pressure lag 3h,0.15219867400855505,mean_abs_shap,17
+target_aqi_72h,random_forest,day_of_week,Day of week,0.14416073385412673,mean_abs_shap,18
+target_aqi_72h,random_forest,pm10_rolling_mean_48h,PM10 rolling mean 48h,0.14386701275310784,mean_abs_shap,19
+target_aqi_72h,random_forest,pressure_msl_lag_1h,Pressure lag 1h,0.14299928740158482,mean_abs_shap,20
+target_aqi_72h,random_forest,us_aqi_lag_48h,US AQI lag 48h,0.13663449260442184,mean_abs_shap,21
+target_aqi_72h,random_forest,wind_speed_10m_rolling_mean_24h,Wind speed rolling mean 24h,0.09447656137305943,mean_abs_shap,22
+target_aqi_72h,random_forest,aqi_change_24h,AQI change 24h,0.0934030079091452,mean_abs_shap,23
+target_aqi_72h,random_forest,pm10_rolling_mean_12h,PM10 rolling mean 12h,0.08700060643652467,mean_abs_shap,24
+target_aqi_72h,random_forest,pm2_5_rolling_mean_72h,PM2.5 rolling mean 72h,0.08698096396853844,mean_abs_shap,25
+target_aqi_72h,random_forest,pm10_rolling_std_48h,PM10 rolling std 48h,0.08404849559853211,mean_abs_shap,26
+target_aqi_72h,random_forest,wind_speed_10m_rolling_std_72h,Wind speed rolling std 72h,0.0830898282963701,mean_abs_shap,27
+target_aqi_72h,random_forest,month,month,0.08099175438977155,mean_abs_shap,28
+target_aqi_72h,random_forest,pm10_rolling_std_72h,PM10 rolling std 72h,0.08077521359329123,mean_abs_shap,29
+target_aqi_72h,random_forest,us_aqi_rolling_mean_24h,US AQI rolling mean 24h,0.07323377127186992,mean_abs_shap,30
+target_aqi_72h,random_forest,pm2_5_rolling_std_48h,PM2.5 rolling std 48h,0.07163870300307486,mean_abs_shap,31
+target_aqi_72h,random_forest,us_aqi_rolling_mean_72h,US AQI rolling mean 72h,0.06450196044742265,mean_abs_shap,32
+target_aqi_72h,random_forest,pressure_msl_lag_12h,Pressure lag 12h,0.05991281414177952,mean_abs_shap,33
+target_aqi_72h,random_forest,us_aqi_rolling_std_48h,US AQI rolling std 48h,0.05767667487922658,mean_abs_shap,34
+target_aqi_72h,random_forest,us_aqi_lag_72h,US AQI lag 72h,0.05663684617927329,mean_abs_shap,35
+target_aqi_72h,random_forest,pm10_rolling_mean_72h,PM10 rolling mean 72h,0.045982725172017874,mean_abs_shap,36
+target_aqi_72h,random_forest,wind_speed_10m_rolling_std_48h,Wind speed rolling std 48h,0.045077811858219706,mean_abs_shap,37
+target_aqi_72h,random_forest,wind_speed_10m_rolling_std_24h,Wind speed rolling std 24h,0.04061761066849,mean_abs_shap,38
+target_aqi_72h,random_forest,wind_speed_10m_rolling_mean_48h,Wind speed rolling mean 48h,0.03989968740420533,mean_abs_shap,39
+target_aqi_72h,random_forest,wind_speed_10m_rolling_mean_6h,Wind speed rolling mean 6h,0.03959214423639281,mean_abs_shap,40
+target_aqi_72h,random_forest,pm2_5_rolling_mean_24h,PM2.5 rolling mean 24h,0.038348389842609104,mean_abs_shap,41
+target_aqi_72h,random_forest,us_aqi_rolling_std_24h,US AQI rolling std 24h,0.036432186195794976,mean_abs_shap,42
+target_aqi_72h,random_forest,us_aqi_rolling_mean_6h,US AQI rolling mean 6h,0.035200817988166024,mean_abs_shap,43
+target_aqi_72h,random_forest,us_aqi_rolling_std_72h,US AQI rolling std 72h,0.0316187020477743,mean_abs_shap,44
+target_aqi_72h,random_forest,pm2_5_rolling_mean_12h,PM2.5 rolling mean 12h,0.02442508121325881,mean_abs_shap,45
+target_aqi_72h,random_forest,pressure_msl_lag_72h,Pressure lag 72h,0.02431203805442339,mean_abs_shap,46
+target_aqi_72h,random_forest,us_aqi_lag_12h,US AQI lag 12h,0.02367522083583498,mean_abs_shap,47
+target_aqi_72h,random_forest,us_aqi_lag_24h,US AQI lag 24h,0.019891780239398343,mean_abs_shap,48
+target_aqi_72h,random_forest,us_aqi_rolling_mean_3h,US AQI rolling mean 3h,0.018158870574346713,mean_abs_shap,49
+target_aqi_72h,random_forest,cloud_cover_lag_6h,Cloud cover lag 6h,0.015076431421094397,mean_abs_shap,50
+target_aqi_72h,random_forest,pm2_5_rolling_std_24h,PM2.5 rolling std 24h,0.014575604627913845,mean_abs_shap,51
+target_aqi_72h,random_forest,pressure_msl_lag_48h,Pressure lag 48h,0.014082737353090178,mean_abs_shap,52
+target_aqi_72h,random_forest,pm10_rolling_std_12h,PM10 rolling std 12h,0.013595922077520993,mean_abs_shap,53
+target_aqi_72h,random_forest,us_aqi_rolling_mean_12h,US AQI rolling mean 12h,0.013496880277013469,mean_abs_shap,54
+target_aqi_72h,random_forest,temperature_2m_rolling_std_24h,Temperature rolling std 24h,0.011659847760209188,mean_abs_shap,55
+target_aqi_72h,random_forest,sulphur_dioxide_lag_72h,SO2 lag 72h,0.010467030711313293,mean_abs_shap,56
+target_aqi_72h,random_forest,pm10_lag_72h,PM10 lag 72h,0.009727942219700334,mean_abs_shap,57
+target_aqi_72h,random_forest,us_aqi_lag_1h,US AQI lag 1h,0.009532658748209476,mean_abs_shap,58
+target_aqi_72h,random_forest,pm2_5_lag_12h,PM2.5 lag 12h,0.009296427389729356,mean_abs_shap,59
+target_aqi_72h,random_forest,wind_speed_10m_lag_24h,Wind speed lag 24h,0.009254918889035419,mean_abs_shap,60
+target_aqi_72h,random_forest,sulphur_dioxide_lag_6h,SO2 lag 6h,0.009056964318321096,mean_abs_shap,61
+target_aqi_72h,random_forest,wind_speed_10m_lag_48h,Wind speed lag 48h,0.00819406017259744,mean_abs_shap,62
+target_aqi_72h,random_forest,sulphur_dioxide_lag_48h,SO2 lag 48h,0.00770178825611078,mean_abs_shap,63
+target_aqi_72h,random_forest,wind_speed_10m_lag_72h,Wind speed lag 72h,0.007655398779545074,mean_abs_shap,64
+target_aqi_72h,random_forest,temperature_2m_rolling_mean_3h,Temperature rolling mean 3h,0.007612858973778251,mean_abs_shap,65
+target_aqi_72h,random_forest,pm2_5_rolling_mean_6h,PM2.5 rolling mean 6h,0.007394217044216337,mean_abs_shap,66
+target_aqi_72h,random_forest,wind_speed_10m,Wind speed,0.007189106140379877,mean_abs_shap,67
+target_aqi_72h,random_forest,us_aqi_lag_3h,US AQI lag 3h,0.007029470528020911,mean_abs_shap,68
+target_aqi_72h,random_forest,wind_direction_10m_lag_6h,Wind direction lag 6h,0.006555066873924159,mean_abs_shap,69
+target_aqi_72h,random_forest,wind_speed_10m_lag_1h,Wind speed lag 1h,0.006212564394611029,mean_abs_shap,70
+target_aqi_72h,random_forest,sulphur_dioxide,SO2,0.006085363955012085,mean_abs_shap,71
+target_aqi_72h,random_forest,ozone_lag_1h,ozone lag 1h,0.006041865817022755,mean_abs_shap,72
+target_aqi_72h,random_forest,pm2_5_lag_72h,PM2.5 lag 72h,0.00599665430549254,mean_abs_shap,73
+target_aqi_72h,random_forest,temperature_2m_lag_6h,Temperature lag 6h,0.005946552522003086,mean_abs_shap,74
+target_aqi_72h,random_forest,sulphur_dioxide_lag_3h,SO2 lag 3h,0.005696737355605909,mean_abs_shap,75
+target_aqi_72h,random_forest,relative_humidity_2m_lag_12h,Humidity lag 12h,0.0056024841998120484,mean_abs_shap,76
+target_aqi_72h,random_forest,ozone_lag_3h,ozone lag 3h,0.005465053362347851,mean_abs_shap,77
+target_aqi_72h,random_forest,pm10_lag_24h,PM10 lag 24h,0.0053650763361933205,mean_abs_shap,78
+target_aqi_72h,random_forest,ozone,ozone,0.005059156234929771,mean_abs_shap,79
+target_aqi_72h,random_forest,wind_speed_10m_lag_12h,Wind speed lag 12h,0.004989883375237862,mean_abs_shap,80
+target_aqi_72h,random_forest,us_aqi,US AQI,0.00492282745180965,mean_abs_shap,81
+target_aqi_72h,random_forest,sulphur_dioxide_lag_1h,SO2 lag 1h,0.004839598435351827,mean_abs_shap,82
+target_aqi_72h,random_forest,ozone_lag_48h,ozone lag 48h,0.004813732538570628,mean_abs_shap,83
+target_aqi_72h,random_forest,wind_direction_10m_lag_48h,Wind direction lag 48h,0.004664202507624434,mean_abs_shap,84
+target_aqi_72h,random_forest,sulphur_dioxide_lag_24h,SO2 lag 24h,0.004654527621156065,mean_abs_shap,85
+target_aqi_72h,random_forest,pm10_lag_12h,PM10 lag 12h,0.004576943062571116,mean_abs_shap,86
+target_aqi_72h,random_forest,temperature_2m_rolling_mean_6h,Temperature rolling mean 6h,0.004269680438044091,mean_abs_shap,87
+target_aqi_72h,random_forest,pm2_5_lag_6h,PM2.5 lag 6h,0.004161284016735857,mean_abs_shap,88
+target_aqi_72h,random_forest,nitrogen_dioxide_lag_6h,NO2 lag 6h,0.004143367296608044,mean_abs_shap,89
+target_aqi_72h,random_forest,wind_direction_10m_lag_12h,Wind direction lag 12h,0.003987348061761491,mean_abs_shap,90
+target_aqi_72h,random_forest,wind_speed_10m_rolling_std_12h,Wind speed rolling std 12h,0.003914377453153215,mean_abs_shap,91
+target_aqi_72h,random_forest,pm2_5_rolling_mean_3h,PM2.5 rolling mean 3h,0.0039040289733147083,mean_abs_shap,92
+target_aqi_72h,random_forest,wind_direction_10m_lag_24h,Wind direction lag 24h,0.0038949336960925657,mean_abs_shap,93
+target_aqi_72h,random_forest,pm10_lag_6h,PM10 lag 6h,0.0038942660402020318,mean_abs_shap,94
+target_aqi_72h,random_forest,ozone_lag_12h,ozone lag 12h,0.003819683583822297,mean_abs_shap,95
+target_aqi_72h,random_forest,pm10_rolling_mean_3h,PM10 rolling mean 3h,0.0036698984258644977,mean_abs_shap,96
+target_aqi_72h,random_forest,pm10_lag_3h,PM10 lag 3h,0.0036391651345351775,mean_abs_shap,97
+target_aqi_72h,random_forest,us_aqi_rolling_std_12h,US AQI rolling std 12h,0.003602550793646874,mean_abs_shap,98
+target_aqi_72h,random_forest,pm2_5_rolling_std_12h,PM2.5 rolling std 12h,0.0035970730544700237,mean_abs_shap,99
+target_aqi_72h,random_forest,pm2_5_lag_48h,PM2.5 lag 48h,0.003550325984470528,mean_abs_shap,100
+target_aqi_72h,random_forest,sulphur_dioxide_lag_12h,SO2 lag 12h,0.0033196101638665143,mean_abs_shap,101
+target_aqi_72h,random_forest,cloud_cover_lag_48h,Cloud cover lag 48h,0.0032056065814106997,mean_abs_shap,102
+target_aqi_72h,random_forest,nitrogen_dioxide_lag_72h,NO2 lag 72h,0.0030700172031322913,mean_abs_shap,103
+target_aqi_72h,random_forest,us_aqi_lag_6h,US AQI lag 6h,0.003037269848263452,mean_abs_shap,104
+target_aqi_72h,random_forest,relative_humidity_2m_lag_6h,Humidity lag 6h,0.0030345549274059017,mean_abs_shap,105
+target_aqi_72h,random_forest,temperature_2m_rolling_mean_12h,Temperature rolling mean 12h,0.003031299893647992,mean_abs_shap,106
+target_aqi_72h,random_forest,wind_direction_10m_lag_3h,Wind direction lag 3h,0.0030292017791782966,mean_abs_shap,107
+target_aqi_72h,random_forest,wind_speed_10m_rolling_mean_3h,Wind speed rolling mean 3h,0.0030168926709390675,mean_abs_shap,108
+target_aqi_72h,random_forest,pm10_lag_48h,PM10 lag 48h,0.0029889487042226276,mean_abs_shap,109
+target_aqi_72h,random_forest,wind_direction_10m_lag_1h,Wind direction lag 1h,0.0029859250076249254,mean_abs_shap,110
+target_aqi_72h,random_forest,wind_direction_10m,Wind direction,0.002944810433553529,mean_abs_shap,111
+target_aqi_72h,random_forest,pm2_5_lag_1h,PM2.5 lag 1h,0.002918073930092087,mean_abs_shap,112
+target_aqi_72h,random_forest,cloud_cover_lag_12h,Cloud cover lag 12h,0.0029001355326739348,mean_abs_shap,113
+target_aqi_72h,random_forest,pm2_5_lag_3h,PM2.5 lag 3h,0.002896450014770125,mean_abs_shap,114
+target_aqi_72h,random_forest,temperature_2m_rolling_std_6h,Temperature rolling std 6h,0.0028821235424129786,mean_abs_shap,115
+target_aqi_72h,random_forest,pm2_5_lag_24h,PM2.5 lag 24h,0.002795063997389073,mean_abs_shap,116
+target_aqi_72h,random_forest,pm10_rolling_mean_6h,PM10 rolling mean 6h,0.0027770585553429624,mean_abs_shap,117
+target_aqi_72h,random_forest,temperature_2m_rolling_std_12h,Temperature rolling std 12h,0.0027644096672448334,mean_abs_shap,118
+target_aqi_72h,random_forest,wind_speed_10m_lag_6h,Wind speed lag 6h,0.002714283607396574,mean_abs_shap,119
+target_aqi_72h,random_forest,relative_humidity_2m_lag_3h,Humidity lag 3h,0.002648476808268352,mean_abs_shap,120
+target_aqi_72h,random_forest,nitrogen_dioxide,NO2,0.002621925409539684,mean_abs_shap,121
+target_aqi_72h,random_forest,wind_direction_10m_lag_72h,Wind direction lag 72h,0.002588781553064981,mean_abs_shap,122
+target_aqi_72h,random_forest,nitrogen_dioxide_lag_3h,NO2 lag 3h,0.0025006614181935977,mean_abs_shap,123
+target_aqi_72h,random_forest,ozone_lag_24h,ozone lag 24h,0.002443052519414535,mean_abs_shap,124
+target_aqi_72h,random_forest,pm10_lag_1h,PM10 lag 1h,0.002427828000797226,mean_abs_shap,125
+target_aqi_72h,random_forest,pm2_5,PM2.5,0.0023852964594852427,mean_abs_shap,126
+target_aqi_72h,random_forest,ozone_lag_72h,ozone lag 72h,0.0023677855808725613,mean_abs_shap,127
+target_aqi_72h,random_forest,cloud_cover_lag_24h,Cloud cover lag 24h,0.002284749771141003,mean_abs_shap,128
+target_aqi_72h,random_forest,temperature_2m_lag_1h,Temperature lag 1h,0.0022752791060938666,mean_abs_shap,129
+target_aqi_72h,random_forest,carbon_monoxide_lag_12h,CO lag 12h,0.0021999513839624494,mean_abs_shap,130
+target_aqi_72h,random_forest,nitrogen_dioxide_lag_12h,NO2 lag 12h,0.002191968837054712,mean_abs_shap,131
+target_aqi_72h,random_forest,temperature_2m,Temperature,0.0021415552375464815,mean_abs_shap,132
+target_aqi_72h,random_forest,pm10,PM10,0.002104522398212597,mean_abs_shap,133
+target_aqi_72h,random_forest,wind_speed_10m_rolling_std_6h,Wind speed rolling std 6h,0.0020996786090104764,mean_abs_shap,134
+target_aqi_72h,random_forest,precipitation_lag_3h,precipitation lag 3h,0.0020548598317587587,mean_abs_shap,135
+target_aqi_72h,random_forest,temperature_2m_lag_24h,Temperature lag 24h,0.002036398908129563,mean_abs_shap,136
+target_aqi_72h,random_forest,nitrogen_dioxide_lag_24h,NO2 lag 24h,0.0020173446862185736,mean_abs_shap,137
+target_aqi_72h,random_forest,temperature_2m_lag_72h,Temperature lag 72h,0.001983120807340822,mean_abs_shap,138
+target_aqi_72h,random_forest,temperature_2m_lag_12h,Temperature lag 12h,0.0019477044931560182,mean_abs_shap,139
+target_aqi_72h,random_forest,carbon_monoxide_lag_6h,CO lag 6h,0.0019287949235721165,mean_abs_shap,140
+target_aqi_72h,random_forest,temperature_2m_lag_3h,Temperature lag 3h,0.0019114125067156837,mean_abs_shap,141
+target_aqi_72h,random_forest,cloud_cover_lag_72h,Cloud cover lag 72h,0.001866566649425593,mean_abs_shap,142
+target_aqi_72h,random_forest,pm10_rolling_std_6h,PM10 rolling std 6h,0.0018510040520496257,mean_abs_shap,143
+target_aqi_72h,random_forest,nitrogen_dioxide_lag_1h,NO2 lag 1h,0.0018491604476101083,mean_abs_shap,144
+target_aqi_72h,random_forest,hour,hour,0.001845464674104913,mean_abs_shap,145
+target_aqi_72h,random_forest,carbon_monoxide,CO,0.0018330158268937478,mean_abs_shap,146
+target_aqi_72h,random_forest,carbon_monoxide_lag_24h,CO lag 24h,0.0017235136099888126,mean_abs_shap,147
+target_aqi_72h,random_forest,relative_humidity_2m_lag_1h,Humidity lag 1h,0.0016935822722174026,mean_abs_shap,148
+target_aqi_72h,random_forest,ozone_lag_6h,ozone lag 6h,0.0016678364553199963,mean_abs_shap,149
+target_aqi_72h,random_forest,carbon_monoxide_lag_48h,CO lag 48h,0.0016583140898242404,mean_abs_shap,150
+target_aqi_72h,random_forest,wind_speed_10m_lag_3h,Wind speed lag 3h,0.0016162779015321761,mean_abs_shap,151
+target_aqi_72h,random_forest,pm2_5_rolling_std_6h,PM2.5 rolling std 6h,0.0016024621973995186,mean_abs_shap,152
+target_aqi_72h,random_forest,nitrogen_dioxide_lag_48h,NO2 lag 48h,0.0015895587401322981,mean_abs_shap,153
+target_aqi_72h,random_forest,us_aqi_rolling_std_6h,US AQI rolling std 6h,0.0015800107547316023,mean_abs_shap,154
+target_aqi_72h,random_forest,relative_humidity_2m,Humidity,0.0015684224155898562,mean_abs_shap,155
+target_aqi_72h,random_forest,carbon_monoxide_lag_72h,CO lag 72h,0.0015278497111360526,mean_abs_shap,156
+target_aqi_72h,random_forest,carbon_monoxide_lag_1h,CO lag 1h,0.0015164293021575422,mean_abs_shap,157
+target_aqi_72h,random_forest,cloud_cover,Cloud cover,0.001481220148947044,mean_abs_shap,158
+target_aqi_72h,random_forest,relative_humidity_2m_lag_72h,Humidity lag 72h,0.0013789125727252307,mean_abs_shap,159
+target_aqi_72h,random_forest,cloud_cover_lag_3h,Cloud cover lag 3h,0.0012732235830810901,mean_abs_shap,160
+target_aqi_72h,random_forest,cloud_cover_lag_1h,Cloud cover lag 1h,0.0012640687709897164,mean_abs_shap,161
+target_aqi_72h,random_forest,carbon_monoxide_lag_3h,CO lag 3h,0.001134747455889282,mean_abs_shap,162
+target_aqi_72h,random_forest,pm2_5_change_1h,PM2.5 change 1h,0.0011245317909824755,mean_abs_shap,163
+target_aqi_72h,random_forest,relative_humidity_2m_lag_48h,Humidity lag 48h,0.001112197091615104,mean_abs_shap,164
+target_aqi_72h,random_forest,pm10_change_1h,PM10 change 1h,0.001091174740131669,mean_abs_shap,165
+target_aqi_72h,random_forest,is_weekend,is weekend,0.001043203186300293,mean_abs_shap,166
+target_aqi_72h,random_forest,pm10_rolling_std_3h,PM10 rolling std 3h,0.001034088782313925,mean_abs_shap,167
+target_aqi_72h,random_forest,temperature_2m_lag_48h,Temperature lag 48h,0.000998576494862748,mean_abs_shap,168
+target_aqi_72h,random_forest,wind_speed_10m_rolling_std_3h,Wind speed rolling std 3h,0.0009223206058185796,mean_abs_shap,169
+target_aqi_72h,random_forest,relative_humidity_2m_lag_24h,Humidity lag 24h,0.0008619212434416658,mean_abs_shap,170
+target_aqi_72h,random_forest,pm2_5_rolling_std_3h,PM2.5 rolling std 3h,0.0007710157850662476,mean_abs_shap,171
+target_aqi_72h,random_forest,temperature_2m_rolling_std_3h,Temperature rolling std 3h,0.0007247386125967324,mean_abs_shap,172
+target_aqi_72h,random_forest,precipitation,precipitation,0.0006259517843696241,mean_abs_shap,173
+target_aqi_72h,random_forest,us_aqi_rolling_std_3h,US AQI rolling std 3h,0.0005114389849359191,mean_abs_shap,174
+target_aqi_72h,random_forest,precipitation_lag_72h,precipitation lag 72h,0.0004893061617791665,mean_abs_shap,175
+target_aqi_72h,random_forest,precipitation_lag_24h,precipitation lag 24h,0.0004521924135252392,mean_abs_shap,176
+target_aqi_72h,random_forest,precipitation_lag_6h,precipitation lag 6h,0.00029428365762797204,mean_abs_shap,177
+target_aqi_72h,random_forest,precipitation_lag_12h,precipitation lag 12h,0.0002903368472973738,mean_abs_shap,178
+target_aqi_72h,random_forest,precipitation_lag_1h,precipitation lag 1h,0.0002695720592546661,mean_abs_shap,179
+target_aqi_72h,random_forest,aqi_change_1h,AQI change 1h,0.0002618813147331405,mean_abs_shap,180
+target_aqi_72h,random_forest,precipitation_lag_48h,precipitation lag 48h,0.00018921869822005234,mean_abs_shap,181
 target_aqi_72h,random_forest,latitude,latitude,0.0,mean_abs_shap,182
 target_aqi_72h,random_forest,longitude,longitude,0.0,mean_abs_shap,183
