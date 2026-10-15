@@ -1,4 +1,4 @@
 generated_at,forecast_time,horizon_hours,model,current_aqi,predicted_aqi,aqi_category,alert
-2026-10-12 23:00:00,2026-10-13 23:00:00,24,random_forest,78,77.51,Moderate,No hazardous AQI alert
-2026-10-12 23:00:00,2026-10-14 23:00:00,48,random_forest,78,76.42,Moderate,No hazardous AQI alert
-2026-10-12 23:00:00,2026-10-15 23:00:00,72,random_forest,78,83.66,Moderate,No hazardous AQI alert
+2026-10-14 23:00:00,2026-10-15 23:00:00,24,random_forest,94,84.49,Moderate,No hazardous AQI alert
+2026-10-14 23:00:00,2026-10-16 23:00:00,48,random_forest,94,103.77,Unhealthy for Sensitive Groups,No hazardous AQI alert
+2026-10-14 23:00:00,2026-10-17 23:00:00,72,random_forest,94,65.69,Moderate,No hazardous AQI alert
